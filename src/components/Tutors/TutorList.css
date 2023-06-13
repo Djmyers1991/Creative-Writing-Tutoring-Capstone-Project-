@@ -1,0 +1,11 @@
+.tutors {
+    display: flex;
+    flex-direction: column;
+}
+
+.tutor {
+    background-color: rgb(243, 230, 255);
+    border: 1px dotted darkmagenta;
+    padding: .70rem;
+    margin: 0.5rem; 
+}

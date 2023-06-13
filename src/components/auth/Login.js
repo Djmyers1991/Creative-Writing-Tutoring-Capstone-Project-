@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import "./Login.css"
 
 export const Login = () => {
-    const [email, set] = useState("DanielM@aol.com")
+    const [email, set] = useState("DanielM@gmail.com")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
@@ -17,7 +17,8 @@ export const Login = () => {
                     const user = foundUsers[0]
                     localStorage.setItem("writing_user", JSON.stringify({
                         id: user.id,
-                        staff: user.isStaff
+                        staff: user.isStaff,
+                        name: user.name
                     }))
 
                     navigate("/")
