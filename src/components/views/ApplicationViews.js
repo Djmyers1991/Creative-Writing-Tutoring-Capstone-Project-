@@ -11,6 +11,7 @@ import { SubmissionSearch } from "../Submissions/SubmissionSearch"
 import { SubmissionContainer } from "../Submissions/SubmissionContainer"
 import { SubmissionDetails } from "../Submissions/SubmissionDetails"
 import { EmployeeProfile } from "../Profile/EmployeeProfile"
+import { SubmissionEdit } from "../Submissions/SubmissionEdit"
 
 export const ApplicationViews = () => {
 	return (
@@ -33,6 +34,8 @@ export const ApplicationViews = () => {
                 <Route path="newPackage" element={ <PackageForm />} />
                 {/* <Route path="submissionForm/:submissionId" element={ <SubmissionDetails />} /> */}
                 <Route path="profiles" element={ <EmployeeProfile />} />
+                <Route path="submissions/:submissionId/edit" element={ <SubmissionEdit />} />
+
 
 
                 
