@@ -10,15 +10,39 @@ export const PackageList = () => {
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
 
-  useEffect(() => {
-    const getAllPackages = () => {
-      fetch(`http://localhost:8088/packages`)
-        .then((response) => response.json())
-        .then((packageArray) => {
-          setPackages(packageArray);
-        });
-    };
+  const deleteButton = (packaged) => {
+    if (writingUserObject.staff) {
+      return (
+        <button
+          onClick={() => {
+            fetch(`http://localhost:8088/packages/${packaged.id}`, {
+              method: "DELETE"
+            })
+              .then(() => {
+                getAllPackages();
+              });
+          }}
+          className="submission__delete"
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return " ";
+    }
+  };
 
+  const getAllPackages = () => {
+    fetch(`http://localhost:8088/packages`)
+      .then((response) => response.json())
+      .then((packageArray) => {
+        setPackages(packageArray);
+      });
+  };
+
+
+  useEffect(() => {
+    
     getAllPackages();
   }, []);
 
@@ -36,6 +60,11 @@ export const PackageList = () => {
     currency: 'USD',
   })}</div>
             <div>Description: {packaged.description}</div>
+            <footer>
+              {
+                deleteButton(packaged)
+              }
+            </footer>
           </section>
         ))}
       </article>
@@ -56,5 +85,6 @@ export const PackageList = () => {
     </>
   );
 };
+
 
 

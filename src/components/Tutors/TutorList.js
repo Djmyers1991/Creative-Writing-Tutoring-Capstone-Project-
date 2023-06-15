@@ -11,16 +11,38 @@ export const TutorList = () => {
 
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
+  const getAllTutors = () => {
+    fetch(`http://localhost:8088/tutorInformation?_expand=user&_isStaff=true`)
+      .then((response) => response.json())
+      .then((tutorArray) => {
+        setTutors(tutorArray);
+      });
+  };
+
+
+  const deleteButton = (tutor) => {
+    if (writingUserObject.staff) {
+      return (
+        <button
+          onClick={() => {
+            fetch(`http://localhost:8088/tutorInformation/${tutor.id}`, {
+              method: "DELETE"
+            })
+              .then(() => {
+                getAllPackages();
+              });
+          }}
+          className="submission__delete"
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return " ";
+    }
+  };
 
   useEffect(() => {
-    const getAllTutors = () => {
-      fetch(`http://localhost:8088/tutorInformation?_expand=user&_isStaff=true`)
-        .then((response) => response.json())
-        .then((tutorArray) => {
-          setTutors(tutorArray);
-        });
-    };
-
     getAllTutors();
   }, []);
 
@@ -37,6 +59,7 @@ export const TutorList = () => {
             <div>Specialty: {tutor.specialty}</div>
             <div>Favorite Book: {tutor.favoriteBook}</div>
             <div>Meaningful Literay Quote: "{tutor.writingQuote}"</div>
+            <footer></footer>
           </section>
             }
         )}

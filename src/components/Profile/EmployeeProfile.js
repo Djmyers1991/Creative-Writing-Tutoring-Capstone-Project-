@@ -10,6 +10,7 @@ export const EmployeeProfile = () => {
         favoriteBook: "",
         specialty: "",
         writingQuote: ""
+        
     })
 
 const localWritingUser = localStorage.getItem("writing_user")

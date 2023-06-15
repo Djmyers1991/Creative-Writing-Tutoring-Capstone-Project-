@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export const SubmissionList = ({ searchTermState }) => {
   const [submissions, setSubmissions] = useState([]);
@@ -9,6 +9,7 @@ export const SubmissionList = ({ searchTermState }) => {
   const [selectedSubmissionId, setSelectedSubmissionId] = useState(null);
 
   const navigate = useNavigate();
+  
 
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
@@ -61,25 +62,49 @@ export const SubmissionList = ({ searchTermState }) => {
   }, [selectedSubmissionId, buttonClicked]);
 
 
-  // const deleteButton = () => {
-  //   if(!writingUserObject.staff) {
-  //     return <button onClick={() => {
-  //       fetch(`http://localhost:8088/`)
+  const deleteButton = (submission) => {
+    if (!writingUserObject.staff) {
+      return (
+        <button
+          onClick={() => {
+            fetch(`http://localhost:8088/submissions/${submission.id}`, {
+              method: "DELETE"
+            })
+              .then(() => {
+                fetch("http://localhost:8088/submissions?_expand=user&_expand=package")
+                  .then((response) => response.json())
+                  .then((submissionArray) => {
+                    setSubmissions(submissionArray);
+                  });
+              });
+          }}
+          className="submission__delete"
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return " ";
+    }
+  };
+  
+  
 
-  //     }
 
-  //   }
-  // }
+  
 
-const canDelete = () => {
-  if () {
-    return <button className="submission__finish">Completed</button>
-  }
-  else {
-    return ""
-  }
 
-}
+
+
+// const canClose = () => {
+//   if () {
+//     return <button className="submission__finish">Completed</button>
+//   }
+//   else {
+//     return 
+//   }
+
+// }
 
 
 
@@ -111,6 +136,11 @@ const canDelete = () => {
                 <p>{`Your tutor is currently reading your submissions. Your edits will not be seen.`}</p>
               )}
             </div>
+            <footer>
+        {
+      deleteButton(submission)
+        }
+      </footer>
           </section>
         ))}
       </article>
@@ -123,11 +153,6 @@ const canDelete = () => {
           ""
         )}
       </footer>
-      <footer>
-        if(!currentUser.staff) {
-          return <button onClick={closeTi"
-        }
-      </footer>
     </>
   );
 };
@@ -135,3 +160,4 @@ const canDelete = () => {
 
 //add a new object to the array that says read or not read? 
 //
+

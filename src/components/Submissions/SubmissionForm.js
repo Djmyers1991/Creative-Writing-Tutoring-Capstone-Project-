@@ -11,7 +11,8 @@ export const SubmissionForm = () => {
         packageId: 0,
         googleDocument: "",
         specificFeedback: "",
-        tutorId: 0
+        tutorId: 0,
+        isRead: false
 
 
     })
@@ -53,7 +54,7 @@ export const SubmissionForm = () => {
             packageId: submission.packageId,
             googleDocument: submission.googleDocument,
             specificFeedback: submission.specificFeedback,
-
+            isRead: false,
             tutorId: submission.tutorId
 
         }
