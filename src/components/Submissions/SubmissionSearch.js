@@ -4,7 +4,13 @@ export const SubmissionSearch = ({setterFunction}) => {
         <input
             onChange={
                 (changeEvent) => {
-                    setterFunction(changeEvent.target.value)
+                    if(changeEvent.target.value.length) {
+                    setterFunction(changeEvent.target.value)}
+                    else {
+
+                        return 
+                        
+                    }
                 }
 
             }

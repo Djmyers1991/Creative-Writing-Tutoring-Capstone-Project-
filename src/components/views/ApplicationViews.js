@@ -7,9 +7,8 @@ import { MessageFormStudent } from "../Messages/MessageFormStudent"
 import { MessageFormTutor } from "../Messages/MessageFormTutor"
 import { MessageList } from "../Messages/MessageList"
 import { PackageForm } from "../Packages/PackageForm"
-import { SubmissionSearch } from "../Submissions/SubmissionSearch"
+import { SubmissionSearch } from "../Submissions/SubmissionList"
 import { SubmissionContainer } from "../Submissions/SubmissionContainer"
-import { SubmissionDetails } from "../Submissions/SubmissionDetails"
 import { EmployeeProfile } from "../Profile/EmployeeProfile"
 import { SubmissionEdit } from "../Submissions/SubmissionEdit"
 
@@ -32,7 +31,6 @@ export const ApplicationViews = () => {
                 <Route path="messageFormTutor" element={ <MessageFormTutor />} />
                 <Route path="messages" element={ <MessageList />} />
                 <Route path="newPackage" element={ <PackageForm />} />
-                {/* <Route path="submissionForm/:submissionId" element={ <SubmissionDetails />} /> */}
                 <Route path="profiles" element={ <EmployeeProfile />} />
                 <Route path="submissions/:submissionId/edit" element={ <SubmissionEdit />} />
 

@@ -4,9 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 export const SubmissionList = ({ searchTermState }) => {
   const [submissions, setSubmissions] = useState([]);
   const [filteredSubmissions, setFilter] = useState([]);
-  const [showMessage, setShowMessage] = useState(false);
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const [selectedSubmissionId, setSelectedSubmissionId] = useState(null);
+ 
 
   const navigate = useNavigate();
   
@@ -14,16 +12,11 @@ export const SubmissionList = ({ searchTermState }) => {
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
 
-  const handleButtonClick = (submissionId) => {
-    setShowMessage(true);
-    setButtonClicked(true);
-    setSelectedSubmissionId(submissionId);
-    localStorage.setItem("selectedSubmissionId", submissionId);
-    localStorage.setItem("buttonClicked", "true");
-  };
 
+  
   useEffect(() => {
-    fetch("http://localhost:8088/submissions?_expand=user&_expand=package")
+    
+    fetch("http://localhost:8088/submissions?_expand=package&_expand=user")
       .then((response) => response.json())
       .then((submissionArray) => {
         setSubmissions(submissionArray);
@@ -41,25 +34,12 @@ export const SubmissionList = ({ searchTermState }) => {
 
   useEffect(() => {
     const searchedSubmissions = filteredSubmissions.filter((submission) => {
-      return submission.specificFeedback
+      return submission?.package?.name
         .toLowerCase()
         .startsWith(searchTermState.toLowerCase());
     });
     setFilter(searchedSubmissions);
   }, [searchTermState]);
-
-  useEffect(() => {
-    const storedSubmissionId = localStorage.getItem("selectedSubmissionId");
-    const storedButtonClicked = localStorage.getItem("buttonClicked");
-    setShowMessage(storedButtonClicked === "true");
-    setSelectedSubmissionId(storedSubmissionId);
-    setButtonClicked(storedButtonClicked === "true");
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("selectedSubmissionId", selectedSubmissionId);
-    localStorage.setItem("buttonClicked", buttonClicked.toString());
-  }, [selectedSubmissionId, buttonClicked]);
 
 
   const deleteButton = (submission) => {
@@ -128,13 +108,12 @@ export const SubmissionList = ({ searchTermState }) => {
             <div>Specific Feedback: {submission.specificFeedback}</div>
             <div>
               {writingUserObject.staff && (
-                <button onClick={() => handleButtonClick(submission.id)}>
+                <button>
                   In Progress
                 </button>
               )}
-              {showMessage && submission.id === selectedSubmissionId && (
                 <p>{`Your tutor is currently reading your submissions. Your edits will not be seen.`}</p>
-              )}
+              
             </div>
             <footer>
         {

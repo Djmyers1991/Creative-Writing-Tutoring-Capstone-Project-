@@ -4,6 +4,8 @@ import "./NavBar.css"
 export const NavBar = () => {
     const navigate = useNavigate()
 
+    const localWritingUser = localStorage.getItem("writing_user")
+    const writingUserObject = JSON.parse(localWritingUser)
     return (
         <ul className="navbar">
             <li className="navbar__item active">
@@ -18,9 +20,12 @@ export const NavBar = () => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/messages">Messages</Link>
             </li>
+            { writingUserObject.staff ? 
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/profiles">Profile</Link>
             </li>
+            : ""
+}
             {
                 localStorage.getItem("writing_user")
                     ? <li className="navbar__item navbar__logout">
