@@ -11,6 +11,7 @@ export const TutorList = () => {
 
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
+  
   const getAllTutors = () => {
     fetch(`http://localhost:8088/tutorInformation?_expand=user&_isStaff=true`)
       .then((response) => response.json())

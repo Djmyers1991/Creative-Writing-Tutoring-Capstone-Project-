@@ -7,30 +7,78 @@ export const MessageList = () => {
 
   const [filteredStudentMessages, setFilterStudent] = useState([]);
   const [filteredTutorMessages, setFilterTutor] = useState([]);
+  const localWritingUser = localStorage.getItem("writing_user");
+  const writingUserObject = JSON.parse(localWritingUser);
+  
+  const getTutorMessages = () => { fetch("http://localhost:8088/tutorMessages?_expand=user")
+  .then((response) => response.json())
+  .then((tutorMessageArray) => {
+    setTutorMessages(tutorMessageArray)
+  })
+}
 
+const getStudentMessages = () => { 
+  fetch("http://localhost:8088/studentMessages?_expand=user")
+    .then((response) => response.json())
+    .then((studentMessageArray) => {
+      setStudentMessages(studentMessageArray)
+    })}
 
   const navigate = useNavigate();
 
-  const localWritingUser = localStorage.getItem("writing_user");
-  const writingUserObject = JSON.parse(localWritingUser);
 
-  const getTutorMessages = fetch("http://localhost:8088/tutorMessages?_expand=user")
-      .then((response) => response.json())
-      .then((tutorMessageArray) => {
-        setTutorMessages(tutorMessageArray);
-      });
+  const deleteButton = (tutorMessager) => {
+    if (writingUserObject.staff) {
+      return (
+        <button
+          onClick={() => {
+            fetch(`http://localhost:8088/tutorMessages/${tutorMessager.id}`, {
+              method: "DELETE"
+            })
+              .then(() => {
+                getTutorMessages()
+              });
+          }}
+          className="submission__delete"
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return " ";
+    }
+  };
+
+    const deleteButtonUser = (studentMessager) => {
+    if (!writingUserObject.staff) {
+      return (
+        <button
+          onClick={() => {
+            fetch(`http://localhost:8088/tutorMessages/${studentMessager.id}`, {
+              method: "DELETE"
+            })
+              .then(() => {
+                getStudentMessages()
+              });
+          }}
+          className="submission__delete"
+        >
+          Delete
+        </button>
+      );
+    } else {
+      return " ";
+    }
+  };
+  
 
   useEffect(() => {
     getTutorMessages()
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8088/studentMessages?_expand=user")
-      .then((response) => response.json())
-      .then((studentMessageArray) => {
-        setStudentMessages(studentMessageArray);
-      });
-  }, []);
+  getStudentMessages()
+  }, [])
 
   useEffect(() => {
     const correctStudentMessage = studentMessages.filter(
@@ -39,7 +87,8 @@ export const MessageList = () => {
         studentMessager.tutorId === writingUserObject.id
     );
     setFilterStudent(correctStudentMessage);
-  }, [studentMessages]);
+  }, 
+  [studentMessages]);
 
   useEffect(() => {
     const correctTutorMessage = tutorMessages.filter(
@@ -58,7 +107,7 @@ export const MessageList = () => {
           <section className="package" key={tutorMessager.id}>
             <div> {tutorMessager?.tutorMessage}</div>
             <div> Sincerely, {tutorMessager?.user?.name} </div>
-
+          <footer>{deleteButton(tutorMessager)}</footer>
           </section>
         ))}
       </article>
@@ -67,6 +116,8 @@ export const MessageList = () => {
           <section className="package" key={studentMessager.id}>
             <div>{studentMessager?.studentMessage}</div>
             <div>Sincerely, {studentMessager?.user?.name}</div>
+            <footer>{deleteButtonUser(studentMessager)}</footer>
+
           </section>
         ))}
       </article>
