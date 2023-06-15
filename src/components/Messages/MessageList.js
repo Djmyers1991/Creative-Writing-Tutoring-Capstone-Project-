@@ -14,12 +14,14 @@ export const MessageList = () => {
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
 
-  useEffect(() => {
-    fetch("http://localhost:8088/tutorMessages?_expand=user")
+  const getTutorMessages = fetch("http://localhost:8088/tutorMessages?_expand=user")
       .then((response) => response.json())
       .then((tutorMessageArray) => {
         setTutorMessages(tutorMessageArray);
       });
+
+  useEffect(() => {
+    getTutorMessages()
   }, []);
 
   useEffect(() => {

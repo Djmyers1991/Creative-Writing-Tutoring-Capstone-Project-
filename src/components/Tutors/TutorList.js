@@ -29,7 +29,7 @@ export const TutorList = () => {
               method: "DELETE"
             })
               .then(() => {
-                getAllPackages();
+                getAllTutors();
               });
           }}
           className="submission__delete"
@@ -59,7 +59,8 @@ export const TutorList = () => {
             <div>Specialty: {tutor.specialty}</div>
             <div>Favorite Book: {tutor.favoriteBook}</div>
             <div>Meaningful Literay Quote: "{tutor.writingQuote}"</div>
-            <footer></footer>
+            <footer> {
+            deleteButton(tutor)} </footer>
           </section>
             }
         )}
