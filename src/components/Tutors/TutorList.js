@@ -52,16 +52,24 @@ export const TutorList = () => {
 
       <article className="tutors">
         {tutors.map( (tutor) => { 
+          
                 return <section className="tutor" key={tutor.id}>
-            <div>During MVP, ask for permission to use likeness</div>
+            <div>
+              
+            <img src= {tutor.image} alt="Image" />
+            </div>
             <div>Name: {tutor?.user?.name}</div>
             <div>Email: {tutor?.user?.email}</div>
             <div>Years of Tutoring Experience: {tutor.experience}</div>
             <div>Specialty: {tutor.specialty}</div>
             <div>Favorite Book: {tutor.favoriteBook}</div>
             <div>Meaningful Literay Quote: "{tutor.writingQuote}"</div>
-            <footer> {
-            deleteButton(tutor)} </footer>
+            <footer>
+  {tutor?.user?.name === writingUserObject.name ? (
+    deleteButton(tutor)
+  ) : ""}
+</footer>
+
           </section>
             }
         )}

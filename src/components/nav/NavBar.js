@@ -15,10 +15,13 @@ export const NavBar = () => {
                 <Link className="navbar__link" to="/packages">Packages</Link>
             </li>
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/submissions">Submissions</Link>
+                <Link className="navbar__link" to="/submissions">Outstanding Submissions</Link>
             </li>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/messages">Messages</Link>
+            </li>
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="/submissions">Finished Submissions</Link>
             </li>
             { writingUserObject.staff ? 
             <li className="navbar__item active">

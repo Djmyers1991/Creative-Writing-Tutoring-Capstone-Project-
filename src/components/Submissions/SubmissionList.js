@@ -12,15 +12,16 @@ export const SubmissionList = ({ searchTermState }) => {
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
 
+  const getAllSubmissions = () => fetch("http://localhost:8088/submissions?_expand=package&_expand=user")
+.then((response) => response.json())
+.then((submissionArray) => {
+  setSubmissions(submissionArray);
+});
 
   
   useEffect(() => {
     
-    fetch("http://localhost:8088/submissions?_expand=package&_expand=user")
-      .then((response) => response.json())
-      .then((submissionArray) => {
-        setSubmissions(submissionArray);
-      });
+    getAllSubmissions();
   }, []);
 
   useEffect(() => {
@@ -69,22 +70,47 @@ export const SubmissionList = ({ searchTermState }) => {
   };
   
   
-
-
+  const canClose = (submission) => {
+    if (writingUserObject.staff) {
+      return (
+        <button onClick={() => closeSubmission(submission)} className="submission__finish">
+          Completed
+        </button>
+      );
+    } else {
+      return "";
+    }
+  }
   
-
-
-
-
-// const canClose = () => {
-//   if () {
-//     return <button className="submission__finish">Completed</button>
-//   }
-//   else {
-//     return 
-//   }
-
-// }
+  
+  const closeSubmission = (submission) => {
+    const copy = {
+      userId: submission.userId,
+      packageId: submission.packageId,
+      googleDocument: submission.googleDocument,
+      specificFeedback: submission.specificFeedback,
+      isRead: submission.isRead,
+      tutorId: submission.tutorId
+    };
+  
+    return fetch(`http://localhost:8088/submissions/${submission.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(copy)
+    })
+    .then(response => response.json())
+    .then(getAllSubmissions);
+  }
+  
+  
+  
+  
+  
+  
+  
+//with PUT, you must go to specific submissions. Can't believe I forgot that.
 
 
 
@@ -94,30 +120,25 @@ export const SubmissionList = ({ searchTermState }) => {
       <article className="submissions">
         {filteredSubmissions.map((submission) => (
           <section className="package" key={submission.id}>
-            {!writingUserObject.staff ? (
+           
               <Link to={`/submissions/${submission.id}/edit`}>
                 Submission {submission.id}
               </Link>
-            ) : (
-              ""
-            )}
+            
+           
             <div>Name: {submission?.user?.name}</div>
             <div>Email: {submission?.user?.email}</div>
             <div>Package Selected: {submission?.package?.name}</div>
             <div>Writing Document: {submission.googleDocument}</div>
             <div>Specific Feedback: {submission.specificFeedback}</div>
-            <div>
-              {writingUserObject.staff && (
-                <button>
-                  In Progress
-                </button>
-              )}
-                <p>{`Your tutor is currently reading your submissions. Your edits will not be seen.`}</p>
-              
-            </div>
             <footer>
         {
       deleteButton(submission)
+        }
+        </footer>
+        <footer>
+        {
+        canClose(submission)
         }
       </footer>
           </section>
@@ -135,8 +156,3 @@ export const SubmissionList = ({ searchTermState }) => {
     </>
   );
 };
-
-
-//add a new object to the array that says read or not read? 
-//
-

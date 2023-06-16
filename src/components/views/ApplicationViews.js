@@ -32,6 +32,7 @@ export const ApplicationViews = () => {
                 <Route path="messages" element={ <MessageList />} />
                 <Route path="newPackage" element={ <PackageForm />} />
                 <Route path="profiles" element={ <EmployeeProfile />} />
+                <Route path="completedSubmissions" element={ <CompletedSubmissionsList />} />
                 <Route path="submissions/:submissionId/edit" element={ <SubmissionEdit />} />
 
 

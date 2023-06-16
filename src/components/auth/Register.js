@@ -23,7 +23,8 @@ export const Register = (props) => {
                 if (createdUser.hasOwnProperty("id")) {
                     localStorage.setItem("writing_user", JSON.stringify({
                         id: createdUser.id,
-                        staff: createdUser.isStaff
+                        staff: createdUser.isStaff,
+                        name: createdUser.fullName
                     }))
 
                     navigate("/")

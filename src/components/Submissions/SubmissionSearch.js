@@ -8,7 +8,7 @@ export const SubmissionSearch = ({setterFunction}) => {
                     setterFunction(changeEvent.target.value)}
                     else {
 
-                        return 
+                        return
                         
                     }
                 }

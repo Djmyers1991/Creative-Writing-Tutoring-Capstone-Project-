@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
+const localWritingUser = localStorage.getItem("writing_user")
+const writingUserObject = JSON.parse(localWritingUser)
+
+
+
 export const SubmissionEdit = () => {
     const [submission, assignSubmission] = useState({
         googleDocument: "",
-        specificFeedback: ""
+        specificFeedback: "",
+        isRead: false
 
     })
     const { submissionId } = useParams()
@@ -34,7 +40,26 @@ export const SubmissionEdit = () => {
             })
     }
 
+const functionToRenderInside = () => {
+    if(!writingUserObject.staff) {
+return  " " } 
+else {
+    return <div className="form-group">
+            <label htmlFor="name">Read:</label>
+            <input
+              type="checkbox"
+              checked={submission.isRead}
+              onChange={(evt) => {
+                const copy = { ...submission };
+                copy.isRead = evt.target.checked;
+                assignSubmission(copy);
+              }}
+            />
+          </div>
 
+       
+      }
+    }
     return <form className="submissionForm">
         <h2 className="submissionForm__title">Submission</h2>
         <fieldset>
@@ -57,7 +82,7 @@ export const SubmissionEdit = () => {
                     }>{submission.googleDocument}</textarea>
             </div>
         </fieldset>
-        <fieldset>
+        <fieldset> 
             <div className="form-group">
                 <label htmlFor="description">Specific Feedback:</label>
                 <textarea
@@ -77,10 +102,28 @@ export const SubmissionEdit = () => {
                     }>{submission.specificFeedback}</textarea>
             </div>
         </fieldset>
-        <button
-            onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-            className="btn btn-primary">
-            Save Edits
-        </button>
-    </form>
+    
+  
+
+
+  <fieldset>
+    {functionToRenderInside()}
+  </fieldset>
+ 
+
+
+    {submission.isRead || !localWritingUser.staff ? (
+  <button
+    onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+    className="btn btn-primary"
+  >
+    Save Edits
+  </button>
+) : " "
+    }
+
+</form>
+
 }
+
+

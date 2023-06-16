@@ -54,7 +54,7 @@ const getStudentMessages = () => {
       return (
         <button
           onClick={() => {
-            fetch(`http://localhost:8088/tutorMessages/${studentMessager.id}`, {
+            fetch(`http://localhost:8088/studentMessages/${studentMessager.id}`, {
               method: "DELETE"
             })
               .then(() => {
@@ -74,7 +74,7 @@ const getStudentMessages = () => {
 
   useEffect(() => {
     getTutorMessages()
-  }, []);
+  }, [])
 
   useEffect(() => {
   getStudentMessages()
@@ -83,6 +83,7 @@ const getStudentMessages = () => {
   useEffect(() => {
     const correctStudentMessage = studentMessages.filter(
       (studentMessager) =>
+      
         studentMessager.userId === writingUserObject.id ||
         studentMessager.tutorId === writingUserObject.id
     );
@@ -94,7 +95,7 @@ const getStudentMessages = () => {
     const correctTutorMessage = tutorMessages.filter(
       (tutorMessager) =>
         tutorMessager.userId === writingUserObject.id ||
-        tutorMessager.tutorId === writingUserObject.id
+        tutorMessager.studentId === writingUserObject.id
     );
     setFilterTutor(correctTutorMessage);
   }, [tutorMessages]);
@@ -132,5 +133,5 @@ const getStudentMessages = () => {
       </button>
       )}
     </>
-  );
-};
+  )
+}
