@@ -23,10 +23,14 @@ export const NavBar = () => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/completedSubmissions">Finished Submissions</Link>
             </li>
+            <li className="navbar__item active"> <Link className="navbar__link" to="/reviews">Reviews</Link>
+</li>
             { writingUserObject.staff ? 
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/profiles">Profile</Link>
             </li>
+
+            
             : ""
 }
             {

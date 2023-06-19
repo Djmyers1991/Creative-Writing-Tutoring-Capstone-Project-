@@ -13,6 +13,8 @@ import { EmployeeProfile } from "../Profile/EmployeeProfile"
 import { SubmissionEdit } from "../Submissions/SubmissionEdit"
 import { CompletedSubmissionsList } from "../Submissions/CompletedSubmissonsList"
 import { CompletedSubmissionForm } from "../Submissions/CompletedSubmissionForm"
+import { ReviewList } from "../Reviews/ReviewList"
+import { ReviewForm } from "../Reviews/ReviewForm"
 
 export const ApplicationViews = () => {
 	return (
@@ -37,6 +39,10 @@ export const ApplicationViews = () => {
                 <Route path="completedSubmissions" element={ <CompletedSubmissionsList />} />
                 <Route path="submissions/:submissionId/edit" element={ <SubmissionEdit />} />
                 <Route path= "submissionCompletedForm" element={ <CompletedSubmissionForm />} />
+                <Route path= "reviews" element={ <ReviewList />} />
+                <Route path= "reviewForm" element={ <ReviewForm />} />
+
+
 
 
 
