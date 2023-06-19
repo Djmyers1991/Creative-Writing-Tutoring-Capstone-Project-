@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "./ReviewList.css"
 
 
 export const ReviewList = () => {
-    const [review, displayReview ] = useState([])
-    const [tutor, setTutors] = useState([])
+    const [reviews, displayReview ] = useState([])
+    const [tutors, setTutors] = useState([])
 
     const navigate = useNavigate()
 
     const getAllTutors = () => {
-        fetch(`http://localhost:8088/tutorInformation?_expand=user&_isStaff=true`)
+        fetch(`http://localhost:8088/users?_isStaff=true`)
           .then((response) => response.json())
           .then((tutorArray) => {
             setTutors(tutorArray);
@@ -20,7 +21,7 @@ export const ReviewList = () => {
         fetch(`http://localhost:8088/reviews`)
           .then((response) => response.json())
           .then((reviewArray) => {
-            setTutors(reviewArray);
+            displayReview(reviewArray);
           });
       };    
     
@@ -37,11 +38,25 @@ export const ReviewList = () => {
 
 
     return <>
-    
-    <button onClick={() => navigate("/reviewForm")}>
-                Submit Review!
-              </button>
 
-              </>
+
+  <h2>Reviews</h2>
+  <article className="studentReviews">
+    {reviews.map((review) => {
+      const tutor = tutors.find((tutor) => tutor.id === review.tutorId)
+      return (
+        <section className="individualReview" key={review.id}>
+          {/* <div>{tutor.name}</div> */}
+          <div>{review.message}</div>
+          {/* <footer>{deleteButton(tutorMessager)}</footer> */}
+        </section>
+      );
+    })}
+  </article>
+
+  <button onClick={() => navigate("/reviewForm")}>
+    Submit Review!
+  </button>
+</>
 }
 

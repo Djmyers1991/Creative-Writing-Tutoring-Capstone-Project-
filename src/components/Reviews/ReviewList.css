@@ -1,0 +1,68 @@
+.studentReviews {
+    display: grid;
+    grid-template-areas: 
+      "review1 review2 review3"
+      "review4 review5 review6"
+      "review7 review8 review9";
+    gap: 20px;
+  }
+  
+  .individualReview {
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .review1 {
+    grid-area: review1;
+  }
+  
+  .review2 {
+    grid-area: review2;
+  }
+  
+  .review3 {
+    grid-area: review3;
+  }
+  
+  .review4 {
+    grid-area: review4;
+  }
+  
+  .review5 {
+    grid-area: review5;
+  }
+  
+  .review6 {
+    grid-area: review6;
+  }
+  
+  .review7 {
+    grid-area: review7;
+  }
+  
+  .review8 {
+    grid-area: review8;
+  }
+  
+  .review9 {
+    grid-area: review9;
+  }
+  .review10 {
+    grid-area: review10;
+  }
+  .review11 {
+    grid-area: review11;
+  }
+  .review12 {
+    grid-area: review12;
+  }
+  .review13 {
+    grid-area: review13;
+  }
+  .review14 {
+    grid-area: review14;
+  }
+  .review15 {
+    grid-area: review15;
+  }
+  
