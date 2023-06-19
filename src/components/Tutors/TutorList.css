@@ -1,11 +1,50 @@
-.tutors {
+body {
+    background: url(https://wallpapers.com/images/high/writing-background-534lttq2mrbgjhjp.webp) no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+
+.tutor-cards {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: silver;
+  }
+  
+  .card {
+    border: 1px solid black;
+    padding: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .card .nameTutor,
+.card .experienceTutor,
+.card .specialtyTutor,
+.card .quoteTutor,
+.card .book {
+  border: 1px dotted black;
+  padding: 5px;
+  background: teal;
+  width: 200px;
 }
 
-.tutor {
-    background-color: rgb(243, 230, 255);
-    border: 1px dotted darkmagenta;
-    padding: .70rem;
-    margin: 0.5rem; 
-}
+.imgTutor {
+    width: 10px; /* Adjust the width as needed */
+    margin-right: 10px; /* Added */
+  }
+
+  .card:hover {
+    transform: scale(1.01); /* Added */
+    color: blue; /* Added */
+    background-color: #f1f1f1
+
+  }
+
+  .card {
+    /* ... */
+    transition: color 0.3s ease; /* Added */
+    transition: background-color 0.3s ease; /* Added */
+  }
+  
+  

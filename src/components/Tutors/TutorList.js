@@ -48,32 +48,35 @@ export const TutorList = () => {
   }, []);
 
   return  <>
-      <h2>List of Tutors</h2>
+  <h2>List of Tutors</h2>
 
-      <article className="tutors">
-        {tutors.map( (tutor) => { 
-          
-                return <section className="tutor" key={tutor.id}>
-            <div>
-              
-            <img src= {tutor.image} alt="Image" />
-            </div>
-            <div>Name: {tutor?.user?.name}</div>
-            <div>Email: {tutor?.user?.email}</div>
-            <div>Years of Tutoring Experience: {tutor.experience}</div>
-            <div>Specialty: {tutor.specialty}</div>
-            <div>Favorite Book: {tutor.favoriteBook}</div>
-            <div>Meaningful Literay Quote: "{tutor.writingQuote}"</div>
-            <footer>
-  {tutor?.user?.name === writingUserObject.name ? (
-    deleteButton(tutor)
-  ) : ""}
-</footer>
-
-          </section>
-            }
+<div className="tutor-cards">
+  {tutors.map((tutor) => (
+    <div className="card" key={tutor.id}>
+      <div className="imgTutor">
+        <img src={tutor.imageLink} alt="Image" />
+      </div>
+      <div className="nameTutor">Name: {tutor?.user?.name}</div>
+      <div className="emailTutor">Email: {tutor?.user?.email}</div>
+      <div className="experienceTutor">
+        Years of Tutoring Experience: {tutor.experience}
+      </div>
+      <div className="specialtyTutor">Specialty: {tutor.specialty}</div>
+      <div className="bookTutor">Favorite Book: {tutor.favoriteBook}</div>
+      <div className="quoteTutor">
+        Meaningful Literary Quote: "{tutor.writingQuote}"
+      </div>
+      <footer className="deleteButtonTutor">
+        {tutor?.user?.name === writingUserObject.name ? (
+          deleteButton(tutor)
+        ) : (
+          ""
         )}
-      </article>
+      </footer>
+    </div>
+  ))}
+</div>
+
       <article className="information">
 
             Insert information about the process. Use as opportunity to practice CSS.

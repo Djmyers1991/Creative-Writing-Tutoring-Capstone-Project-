@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export const CompletedSubmissionForm = () => {
     /*
@@ -13,7 +15,10 @@ export const CompletedSubmissionForm = () => {
         linkWithEdits: "",
         specificFeedback: "",
         tutorId: 0,
-        dateCompleted: ""
+        dateCompleted: null,
+        paymentReceived: true,
+        submissionId: "",
+        isFinished: false
     })
 
     const [tutorArray, changeTutorState] = useState([])
@@ -26,8 +31,7 @@ export const CompletedSubmissionForm = () => {
         the user to the ticket list
     */
 
-    const localWritingUser = localStorage.getItem("writing_user")
-    const writingUserObject = JSON.parse(localWritingUser)
+   
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -60,15 +64,19 @@ export const CompletedSubmissionForm = () => {
 
         const submissionToSendToAPI = {
             userId: completedSubmission.userId,
+            paymentReceived: true,
             packageId: completedSubmission.packageId,
             linkWithEdits: completedSubmission.linkWithEdits,
             specificFeedback: completedSubmission.specificFeedback,
-            tutorId: writingUserObject.id,
+            tutorId: completedSubmission.tutorId,
             dateCompleted: completedSubmission.dateCompleted,
-            paymentReceived: true
-
+            submissionId: completedSubmission.submissionId,
+            paymentReceived: true,
+            isFinished: false
         }
-        fetch(`http://localhost:8088/completedForm`, {
+        
+        
+        fetch(`http://localhost:8088/completedSubmissions`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -102,10 +110,28 @@ export const CompletedSubmissionForm = () => {
                 </div>
             </fieldset>
             <fieldset>
+  <div className="form-group">
+    <label htmlFor="submissionNumber">Submission Identification:</label>
+    <input
+      required
+      autoFocus
+      type="text"
+      className="form-control"
+      placeholder="Outstanding Submission Number"
+      value={completedSubmission.submissionId}
+      onChange={(evt) => {
+        const copy = { ...completedSubmission };
+        copy.submissionId = parseInt(evt.target.value);
+        update(copy);
+      }}
+    />
+  </div>
+</fieldset>
+            <fieldset>
                 <div className="form-group">
                     <select value={completedSubmission.tutorName} onChange={(evt) => {
                         const copy = { ...completedSubmission }
-                        copy.userId = parseInt(evt.target.value)
+                        copy.tutorId = parseInt(evt.target.value)
                         update(copy)
                     }}>
                         <option value="0">Reviewer Name</option>
@@ -134,23 +160,23 @@ export const CompletedSubmissionForm = () => {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Edited Submission</label>
-                    <input
-                        required autoFocus
-                        type="link"
-                        className="form-control"
-                        placeholder="link to your edits"
-                        value={completedSubmission.description}
-                        onChange={(evt) => {
-                            const copy = { ...completedSubmission }
-                            copy.linkWithEdits = evt.target.value
-                            update(copy)
-
-
-                        }} />
-                </div>
-            </fieldset> 
+  <div className="form-group">
+    <label htmlFor="linkWithEdits">Edited Submission:</label>
+    <input
+      required
+      autoFocus
+      type="text"
+      className="form-control"
+      placeholder="Link to your edits"
+      value={completedSubmission.linkWithEdits}
+      onChange={(evt) => {
+        const copy = { ...completedSubmission };
+        copy.linkWithEdits = evt.target.value;
+        update(copy);
+      }}
+    />
+  </div>
+</fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Specific Feedback:</label>
@@ -159,7 +185,7 @@ export const CompletedSubmissionForm = () => {
                         type="text"
                         className="form-control"
                         placeholder="Please tell me specific problem areas in your writing."
-                        value={completedSubmission.description}
+                        value={completedSubmission.specificFeedback}
                         onChange={(evt) => {
                             const copy = { ...completedSubmission }
                             copy.specificFeedback = evt.target.value
@@ -170,29 +196,28 @@ export const CompletedSubmissionForm = () => {
                 </div>
             </fieldset> 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Date:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Please tell me specific problem areas in your writing."
-                        value={completedSubmission.dateCompleted}
-                        onChange={(evt) => {
-                            const copy = { ...completedSubmission }
-                            copy.specificFeedback = evt.target.value
-                            update(copy)
-
-
-                        }} />
-                </div>
-            </fieldset> 
+        <div className="date">
+          <label htmlFor="dateCompleted">Date Completed:</label>
+          <DatePicker
+            id="dateCompleted"
+            selected={completedSubmission.dateCompleted}
+            onChange={(date) => {
+              const copy = { ...completedSubmission };
+              copy.dateCompleted = date;
+              update(copy);
+            }}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select a date"
+            // Any additional props or configurations for DatePicker can be added here
+          />
+        </div>
+      </fieldset> 
             <button
                 onClick={
                     (clickEvent) => { handleSaveButtonClick(clickEvent) }
                 }
                 className="btn btn-primary">
-                Submit Your Brilliance!
+                Submit!
             </button>
         </form>
     )

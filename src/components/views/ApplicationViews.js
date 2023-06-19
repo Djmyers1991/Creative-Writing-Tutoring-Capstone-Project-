@@ -11,6 +11,8 @@ import { SubmissionSearch } from "../Submissions/SubmissionList"
 import { SubmissionContainer } from "../Submissions/SubmissionContainer"
 import { EmployeeProfile } from "../Profile/EmployeeProfile"
 import { SubmissionEdit } from "../Submissions/SubmissionEdit"
+import { CompletedSubmissionsList } from "../Submissions/CompletedSubmissonsList"
+import { CompletedSubmissionForm } from "../Submissions/CompletedSubmissionForm"
 
 export const ApplicationViews = () => {
 	return (
@@ -34,10 +36,12 @@ export const ApplicationViews = () => {
                 <Route path="profiles" element={ <EmployeeProfile />} />
                 <Route path="completedSubmissions" element={ <CompletedSubmissionsList />} />
                 <Route path="submissions/:submissionId/edit" element={ <SubmissionEdit />} />
+                <Route path= "submissionCompletedForm" element={ <CompletedSubmissionForm />} />
 
 
 
-                
+
+               
 
 
 

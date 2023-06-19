@@ -21,7 +21,7 @@ export const NavBar = () => {
                 <Link className="navbar__link" to="/messages">Messages</Link>
             </li>
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/submissions">Finished Submissions</Link>
+                <Link className="navbar__link" to="/completedSubmissions">Finished Submissions</Link>
             </li>
             { writingUserObject.staff ? 
             <li className="navbar__item active">

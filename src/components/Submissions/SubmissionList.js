@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SubmissionList = ({ searchTermState }) => {
   const [submissions, setSubmissions] = useState([]);
@@ -30,7 +30,7 @@ export const SubmissionList = ({ searchTermState }) => {
         submission.userId === writingUserObject.id ||
         submission.tutorId === writingUserObject.id
     );
-    setFilter(correctSubmissions);
+    setFilter(correctSubmissions)
   }, [submissions]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const SubmissionList = ({ searchTermState }) => {
 
 
   const deleteButton = (submission) => {
-    if (!writingUserObject.staff) {
+    if (!writingUserObject.staff || writingUserObject.staff) {
       return (
         <button
           onClick={() => {
@@ -70,39 +70,6 @@ export const SubmissionList = ({ searchTermState }) => {
   };
   
   
-  const canClose = (submission) => {
-    if (writingUserObject.staff) {
-      return (
-        <button onClick={() => closeSubmission(submission)} className="submission__finish">
-          Completed
-        </button>
-      );
-    } else {
-      return "";
-    }
-  }
-  
-  
-  const closeSubmission = (submission) => {
-    const copy = {
-      userId: submission.userId,
-      packageId: submission.packageId,
-      googleDocument: submission.googleDocument,
-      specificFeedback: submission.specificFeedback,
-      isRead: submission.isRead,
-      tutorId: submission.tutorId
-    };
-  
-    return fetch(`http://localhost:8088/submissions/${submission.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(copy)
-    })
-    .then(response => response.json())
-    .then(getAllSubmissions);
-  }
   
   
   
@@ -136,11 +103,15 @@ export const SubmissionList = ({ searchTermState }) => {
       deleteButton(submission)
         }
         </footer>
+
         <footer>
-        {
-        canClose(submission)
-        }
-      </footer>
+            {writingUserObject.staff && (
+              <button onClick={() => navigate("/submissionCompletedForm")}>
+                Submit Edits!
+              </button>
+            )}
+          </footer>
+    
           </section>
         ))}
       </article>

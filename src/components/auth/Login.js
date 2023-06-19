@@ -22,7 +22,7 @@ export const Login = () => {
                     }))
 
                     navigate("/")
-                }
+                } //This is where I add another page!
                 else {
                     window.alert("Invalid login")
                 }
