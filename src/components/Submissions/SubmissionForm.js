@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 export const SubmissionForm = () => {
     /*
         TODO: Add the correct default properties to the
-        initial state object
+        initial state object''update initial state
     */
     const [submission, update] = useState({
         userId: 0,

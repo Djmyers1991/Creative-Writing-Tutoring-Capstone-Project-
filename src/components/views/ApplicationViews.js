@@ -16,7 +16,7 @@ import { CompletedSubmissionForm } from "../Submissions/CompletedSubmissionForm"
 import { ReviewList } from "../Reviews/ReviewList"
 import { ReviewForm } from "../Reviews/ReviewForm"
 import { HomePage } from "../auth/HomePage"
-import { App, ContainerSort } from "../auth/DragnDrop/ContainerSort"
+import { App, ContainerSort } from "../auth/DragnDrop/BookClubList"
 
 export const ApplicationViews = () => {
     const localWritingUser = localStorage.getItem("writing_user");
