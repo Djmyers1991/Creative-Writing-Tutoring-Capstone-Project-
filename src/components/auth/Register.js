@@ -6,7 +6,8 @@ export const Register = (props) => {
     const [customer, setCustomer] = useState({
         email: "",
         fullName: "",
-        isStaff: false
+        isStaff: false,
+        isChiefAdmin: false
     })
     let navigate = useNavigate()
 
@@ -24,7 +25,8 @@ export const Register = (props) => {
                     localStorage.setItem("writing_user", JSON.stringify({
                         id: createdUser.id,
                         staff: createdUser.isStaff,
-                        name: createdUser.fullName
+                        name: createdUser.fullName,
+                        admin: createdUser.isChiefAdmin
                     }))
 
                     navigate("/")

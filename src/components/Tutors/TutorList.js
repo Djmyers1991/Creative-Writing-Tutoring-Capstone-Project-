@@ -22,7 +22,7 @@ export const TutorList = () => {
 
 
   const deleteButton = (tutor) => {
-    if (writingUserObject.staff) {
+    if (writingUserObject.admin) {
       return (
         <button
           onClick={() => {
@@ -54,12 +54,12 @@ export const TutorList = () => {
   {tutors.map((tutor) => (
     <div className="card" key={tutor.id}>
       <div className="imgTutor">
-        <img src={tutor.imageLink} alt="Image" />
+        <img className="imgSize" src={tutor.imageLink} alt="Image" />
       </div>
       <div className="nameTutor">Name: {tutor?.user?.name}</div>
       <div className="emailTutor">Email: {tutor?.user?.email}</div>
       <div className="experienceTutor">
-        Years of Tutoring Experience: {tutor.experience}
+        Tutoring Experience: {tutor.experience}
       </div>
       <div className="specialtyTutor">Specialty: {tutor.specialty}</div>
       <div className="bookTutor">Favorite Book: {tutor.favoriteBook}</div>
@@ -67,7 +67,7 @@ export const TutorList = () => {
         Meaningful Literary Quote: "{tutor.writingQuote}"
       </div>
       <footer className="deleteButtonTutor">
-        {tutor?.user?.name === writingUserObject.name ? (
+        {tutor?.user?.name === writingUserObject.name || writingUserObject.admin ? (
           deleteButton(tutor)
         ) : (
           ""
@@ -77,15 +77,7 @@ export const TutorList = () => {
   ))}
 </div>
 
-      <article className="information">
-
-            Insert information about the process. Use as opportunity to practice CSS.
-
-      </article>
-
-      <article>
-        Insert writing quotes. Use as opportunity to practice CSS.
-      </article>
+  
       <article>
         <div>For more information about our packages, please click on the button below.</div>
       <button onClick={() => navigate("/packages")}>Packages</button>

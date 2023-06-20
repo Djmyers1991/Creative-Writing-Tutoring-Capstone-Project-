@@ -15,14 +15,18 @@ import { CompletedSubmissionsList } from "../Submissions/CompletedSubmissonsList
 import { CompletedSubmissionForm } from "../Submissions/CompletedSubmissionForm"
 import { ReviewList } from "../Reviews/ReviewList"
 import { ReviewForm } from "../Reviews/ReviewForm"
+import { HomePage } from "../auth/HomePage"
+import { App, ContainerSort } from "../auth/DragnDrop/ContainerSort"
 
 export const ApplicationViews = () => {
+    const localWritingUser = localStorage.getItem("writing_user");
+    const writingUserObject = JSON.parse(localWritingUser);
 	return (
         <Routes>
             <Route path="/" element={
                 <>
                    <h1 className="title--main">Creative Writing Website</h1>
-		<div>Your one-stop shop for repairing your writing</div>
+		
                     <Outlet />
                 </>
             }>
@@ -41,6 +45,9 @@ export const ApplicationViews = () => {
                 <Route path= "submissionCompletedForm" element={ <CompletedSubmissionForm />} />
                 <Route path= "reviews" element={ <ReviewList />} />
                 <Route path= "reviewForm" element={ <ReviewForm />} />
+                <Route path= "homePage" element={ <HomePage />} />
+                <Route path= "bookList" element={ <App />} />
+
 
 
 

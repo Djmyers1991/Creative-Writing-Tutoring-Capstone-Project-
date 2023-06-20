@@ -4,7 +4,8 @@
 }
 
 .package {
-    background-color: rgb(243, 230, 255);
+    background: lightcyan;
+    ;
     border: 1px dotted darkmagenta;
     padding: .70rem;
     margin: 0.5rem; 

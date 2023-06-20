@@ -25,14 +25,18 @@ body {
 .card .book {
   border: 1px dotted black;
   padding: 5px;
-  background: teal;
+  background: rgb(221, 242, 242);
   width: 200px;
 }
 
 .imgTutor {
-    width: 10px; /* Adjust the width as needed */
+    width: .0002px;
     margin-right: 10px; /* Added */
   }
+
+ .imgSize {
+  size: 0 px;
+ }
 
   .card:hover {
     transform: scale(1.01); /* Added */

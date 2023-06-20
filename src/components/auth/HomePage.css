@@ -1,0 +1,48 @@
+.introduction {
+    position: relative;
+    text-align: center;
+    margin: 20px;
+    color: navy;
+    font-family: tahoma;
+  }
+  
+  .introduction h4 {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .introduction h5 {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 40px;
+    border: 2px solid navy; /* Add a border around h5 */
+    padding: 10px; /* Optional: Add padding to create some space between the border and content */
+  }
+  
+  .dialogue-bubble {
+    position: relative;
+    display: inline-block;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  .dialogue-bubble::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-bottom-color: #f0f0f0;
+  }
+  .brainBulb {
+    width: 200px; 
+    height: auto;
+  }
+  .snootyMan {
+    width: 150px;
+    height: auto;
+  }

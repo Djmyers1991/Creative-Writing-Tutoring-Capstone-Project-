@@ -18,11 +18,12 @@ export const Login = () => {
                     localStorage.setItem("writing_user", JSON.stringify({
                         id: user.id,
                         staff: user.isStaff,
-                        name: user.name
+                        name: user.name,
+                        admin: user.isChiefAdmin
                     }))
 
-                    navigate("/")
-                } //This is where I add another page!
+                    navigate("/homePage")
+                } 
                 else {
                     window.alert("Invalid login")
                 }

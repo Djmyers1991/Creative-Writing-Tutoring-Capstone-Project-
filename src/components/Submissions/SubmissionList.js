@@ -107,7 +107,7 @@ export const SubmissionList = ({ searchTermState }) => {
         <footer>
             {writingUserObject.staff && (
               <button onClick={() => navigate("/submissionCompletedForm")}>
-                Submit Edits!
+                Final Submission!
               </button>
             )}
           </footer>

@@ -8,6 +8,10 @@ export const NavBar = () => {
     const writingUserObject = JSON.parse(localWritingUser)
     return (
         <ul className="navbar">
+             <li className="navbar__item active">
+                <Link className="navbar__link" to="/homePage"><img className="imgPencil" src="https://thumbs.dreamstime.com/b/balloon-drawing-pencil-art-fly-high-logo-template-balloon-drawing-pencil-art-fly-high-logo-template-141619603.jpg" alt="Image" /></Link>
+               
+            </li>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/tutors">Tutors</Link>
             </li>
@@ -15,13 +19,13 @@ export const NavBar = () => {
                 <Link className="navbar__link" to="/packages">Packages</Link>
             </li>
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/submissions">Outstanding Submissions</Link>
+                <Link className="navbar__link" to="/submissions">Submissions</Link>
             </li>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/messages">Messages</Link>
             </li>
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/completedSubmissions">Finished Submissions</Link>
+                <Link className="navbar__link" to="/completedSubmissions">Completed </Link>
             </li>
             <li className="navbar__item active"> <Link className="navbar__link" to="/reviews">Reviews</Link>
 </li>

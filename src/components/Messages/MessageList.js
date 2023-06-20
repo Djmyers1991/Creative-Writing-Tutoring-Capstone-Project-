@@ -50,7 +50,7 @@ const getStudentMessages = () => {
   };
 
     const deleteButtonUser = (studentMessager) => {
-    if (!writingUserObject.staff) {
+    
       return (
         <button
           onClick={() => {
@@ -65,10 +65,7 @@ const getStudentMessages = () => {
         >
           Delete
         </button>
-      );
-    } else {
-      return " ";
-    }
+      )
   };
   
 

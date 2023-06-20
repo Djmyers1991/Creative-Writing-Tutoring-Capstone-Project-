@@ -11,7 +11,7 @@ export const PackageList = () => {
   const writingUserObject = JSON.parse(localWritingUser);
 
   const deleteButton = (packaged) => {
-    if (writingUserObject.staff) {
+    if (writingUserObject.admin) {
       return (
         <button
           onClick={() => {
@@ -67,14 +67,6 @@ export const PackageList = () => {
             </footer>
           </section>
         ))}
-      </article>
-
-      <article className="information">
-        Insert information about the process. Use as an opportunity to practice CSS.
-      </article>
-
-      <article>
-        Insert writing quotes. Use as an opportunity to practice CSS.
       </article>
 
       <article>
