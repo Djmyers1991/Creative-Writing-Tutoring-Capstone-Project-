@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const SubmissionList = ({ searchTermState }) => {
   const [submissions, setSubmissions] = useState([]);
-  const [filteredSubmissions, setFilter] = useState([]);
+  const [filteredSubmissions, setFiltered] = useState([]);
  
 
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const SubmissionList = ({ searchTermState }) => {
         submission.userId === writingUserObject.id ||
         submission.tutorId === writingUserObject.id
     );
-    setFilter(correctSubmissions)
+    setFiltered(correctSubmissions)
   }, [submissions]);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const SubmissionList = ({ searchTermState }) => {
         .toLowerCase()
         .startsWith(searchTermState.toLowerCase());
     });
-    setFilter(searchedSubmissions);
+    setFiltered(searchedSubmissions);
   }, [searchTermState]);
 
 
@@ -96,8 +96,22 @@ export const SubmissionList = ({ searchTermState }) => {
             <div>Name: {submission?.user?.name}</div>
             <div>Email: {submission?.user?.email}</div>
             <div>Package Selected: {submission?.package?.name}</div>
-            <div>Writing Document: {submission.googleDocument}</div>
-            <div>Specific Feedback: {submission.specificFeedback}</div>
+            <div>
+                    {submission.googleDocument && (
+                      <a
+                        href={
+                          submission.googleDocument.startsWith("http://") ||
+                          submission.googleDocument.startsWith("https://")
+                            ? submission.googleDocument
+                            : `http://${submission.googleDocument}`
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Click here to view the edited submission
+                      </a>
+                    )}
+                  </div>            <div>Specific Feedback: {submission.specificFeedback}</div>
             <footer>
         {
       deleteButton(submission)
@@ -118,7 +132,7 @@ export const SubmissionList = ({ searchTermState }) => {
       <footer>
         {!writingUserObject.staff ? (
           <button onClick={() => navigate("/submissionForm")}>
-            Click here to submit your work!
+            Submit Your Work!
           </button>
         ) : (
           ""

@@ -54,12 +54,12 @@ export const PackageList = () => {
         {packages.map((packaged) => (
          
           <section className="package" key={packaged.id}>
-            <div>Name: {packaged.name}</div>
-            <div>Price: {packaged.price.toLocaleString('en-US', {
+            <div> {packaged.name}</div>
+            <div>{packaged.price.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   })}</div>
-            <div>Description: {packaged.description}</div>
+            <div className="description">{packaged.description}</div>
             <footer>
               {
                 deleteButton(packaged)
@@ -72,7 +72,7 @@ export const PackageList = () => {
       <article>
   
         { writingUserObject.staff ? <button onClick={() => navigate("/newPackage")}>Create New Package</button>
-        :  <button onClick={() => navigate("/submissionForm")}>Click here to submit your writing</button> }
+        :  <button onClick={() => navigate("/submissionForm")}>Submit Your Writing</button> }
       </article>
     </>
   );

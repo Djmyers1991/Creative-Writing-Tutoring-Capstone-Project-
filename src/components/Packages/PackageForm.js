@@ -41,7 +41,7 @@ export const PackageForm = () => {
 
     return (
         <form className="packageForm">
-            <h2 className="packageForm__title">Message Instructor for Questions</h2>
+            <h2 className="packageForm__title">Create New Package</h2>
 
             <fieldset>
                 <div className="form-group">

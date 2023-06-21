@@ -10,3 +10,33 @@
     padding: .70rem;
     margin: 0.5rem; 
 }
+
+article {
+    text-align: center;
+    
+  }
+
+  .description {
+    font-size: 13px;
+    font-family: georgia;
+  }
+  .package {
+    font-family: georgia;
+  }
+  
+  button {
+    background-color: rgb(133, 133, 210);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font: georgia;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

@@ -78,9 +78,8 @@ export const TutorList = () => {
 </div>
 
   
-      <article>
-        <div>For more information about our packages, please click on the button below.</div>
-      <button onClick={() => navigate("/packages")}>Packages</button>
+      <article className="packageInformation">
+      <button onClick={() => navigate("/packages")}>View Packages</button>
       </article>
     </>
 };

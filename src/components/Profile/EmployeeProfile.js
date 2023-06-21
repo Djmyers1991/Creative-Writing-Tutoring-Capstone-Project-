@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const EmployeeProfile = () => {
     // TODO: Provide initial state for profile
@@ -13,9 +14,12 @@ export const EmployeeProfile = () => {
         
     })
 
+
 const localWritingUser = localStorage.getItem("writing_user")
 const writingUserObject = JSON.parse(localWritingUser)
+const navigate = useNavigate()
     
+
     // TODO: Get employee profile info from API and update state
 useEffect(() => {
      fetch (`http://localhost:8088/tutorInformation?userId=${writingUserObject.id}`)
@@ -23,6 +27,7 @@ useEffect(() => {
      .then((data) => {
         const employeeObject = data[0]
         updateProfile(employeeObject)
+        
      }
      )
 },
@@ -52,7 +57,7 @@ useEffect(() => {
         })
         .then(response => response.json())
         .then(() => {
-            setFeedback("Employee profile successfully saved")
+            navigate("/tutors")
         })
     
     }

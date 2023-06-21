@@ -46,3 +46,7 @@
     width: 150px;
     height: auto;
   }
+
+  .body {
+    font-family: georgia;
+  }

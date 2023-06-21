@@ -25,9 +25,7 @@ export const HomePage = () => {
             and receive extensive feedback in return.</div>
           </h5>
           <h5>
-            This website enables users to view the tutors' credentials
-            as well as the individual packages. Feel free to send a message if you have any
-            questions or concerns.
+            Feel free to send a message if you have any questions or concerns.
           </h5>
           </article>
         </article>

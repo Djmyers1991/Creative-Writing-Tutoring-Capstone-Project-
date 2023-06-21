@@ -1,20 +1,24 @@
-export const SubmissionSearch = ({setterFunction}) => {
-    return(
-        <div>
-        <input
-            onChange={
-                (changeEvent) => {
-                    if(changeEvent.target.value.length) {
-                    setterFunction(changeEvent.target.value)}
-                    else {
-
-                        return
-                        
-                    }
-                }
-
-            }
-        type="text" placeholder="Enter Search Genre"/>
-        </div>
-    )
-}
+export const SubmissionSearch = ({ setterFunction }) => {
+    const localWritingUser = localStorage.getItem("writing_user");
+    const writingUserObject = JSON.parse(localWritingUser);
+    
+    if (writingUserObject.staff) {
+        return (
+            <div>
+                <input
+                    onChange={(changeEvent) => {
+                        if (changeEvent.target.value.length) {
+                            setterFunction(changeEvent.target.value);
+                        } else {
+                            return;
+                        }
+                    }}
+                    type="text"
+                    placeholder="Enter Search Genre"
+                />
+            </div>
+        );
+    } else {
+        return "";
+    }
+};
