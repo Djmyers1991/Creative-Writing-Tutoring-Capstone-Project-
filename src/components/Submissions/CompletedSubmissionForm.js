@@ -128,13 +128,14 @@ export const CompletedSubmissionForm = () => {
   </div>
 </fieldset>
             <fieldset>
-                <div className="form-group">
+                <div className="form-group select">
+                    Reviewer:
                     <select value={completedSubmission.tutorName} onChange={(evt) => {
                         const copy = { ...completedSubmission }
                         copy.tutorId = parseInt(evt.target.value)
                         update(copy)
                     }}>
-                        <option value="0">Reviewer Name</option>
+                        <option value="0"> Name</option>
                         {
                             tutorArray.map(tutorObject => <option key={`tutorObject--${tutorObject.id}`} value={tutorObject.id}>{tutorObject.name}</option>)
                         }
@@ -143,13 +144,14 @@ export const CompletedSubmissionForm = () => {
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <select value={completedSubmission.packageId} onChange={(evt) => {
+                <div className="form-group select">
+                    Package:
+                    <select className="form-group select" value={completedSubmission.packageId} onChange={(evt) => {
                         const copy = { ...completedSubmission }
                         copy.packageId = parseInt(evt.target.value)
                         update(copy)
                     }}>
-                        <option value="0">Package Reviewed</option>
+                        <option className="form-group" value="0">Genre</option>
                         {
                             packageArray.map(packageType => <option key={`packageType--${packageType.id}`} value={packageType.id}>{packageType.name} Price: {packageType.price.toLocaleString('en-US', {
                                 style: 'currency',
@@ -180,7 +182,7 @@ export const CompletedSubmissionForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Specific Feedback:</label>
-                    <input
+                    <textarea
                         required autoFocus
                         type="text"
                         className="form-control"
@@ -196,7 +198,7 @@ export const CompletedSubmissionForm = () => {
                 </div>
             </fieldset> 
             <fieldset>
-        <div className="date">
+        <div className="form-group">
           <label htmlFor="dateCompleted">Date Completed:</label>
           <DatePicker
             id="dateCompleted"

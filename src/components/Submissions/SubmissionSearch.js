@@ -5,7 +5,7 @@ export const SubmissionSearch = ({ setterFunction }) => {
     if (writingUserObject.staff) {
         return (
             <div>
-                <input
+                <input className="searchBar"
                     onChange={(changeEvent) => {
                         if (changeEvent.target.value.length) {
                             setterFunction(changeEvent.target.value);
@@ -14,7 +14,7 @@ export const SubmissionSearch = ({ setterFunction }) => {
                         }
                     }}
                     type="text"
-                    placeholder="Enter Search Genre"
+                    placeholder="Genre"
                 />
             </div>
         );

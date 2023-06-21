@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Submissions.css"
+
+
+
 
 export const SubmissionList = ({ searchTermState }) => {
   const [submissions, setSubmissions] = useState([]);
@@ -83,7 +87,7 @@ export const SubmissionList = ({ searchTermState }) => {
 
   return (
     <>
-      <h2>List of Submissions</h2>
+      <h2>Submissions</h2>
       <article className="submissions">
         {filteredSubmissions.map((submission) => (
           <section className="package" key={submission.id}>
@@ -108,7 +112,7 @@ export const SubmissionList = ({ searchTermState }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Click here to view the edited submission
+                        Submission
                       </a>
                     )}
                   </div>            <div>Specific Feedback: {submission.specificFeedback}</div>

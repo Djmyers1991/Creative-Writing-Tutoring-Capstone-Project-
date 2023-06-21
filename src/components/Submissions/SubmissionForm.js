@@ -75,83 +75,105 @@ export const SubmissionForm = () => {
 
     return (
         <form className="submissionForm">
-            <h2 className="submissionForm__title">Creative Writing Submission Form</h2>
-              
-            <fieldset>
-                <div className="form-group">
-                    <select value={submission.tutorName} onChange={(evt) => {
-                        const copy = { ...submission }
-                        copy.tutorId = parseInt(evt.target.value)
-                        update(copy)
-                    }}>
-                        <option value="0">List of Tutors</option>
-                        {
-                            tutorArray.map(tutorObject => <option key={`tutorObject--${tutorObject.id}`} value={tutorObject.id}>{tutorObject.name}</option>)
-                        }
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div className="form-group">
-                    <select value={submission.packageId} onChange={(evt) => {
-                        const copy = { ...submission }
-                        copy.packageId = parseInt(evt.target.value)
-                        update(copy)
-                    }}>
-                        <option value="0">Select Your Package</option>
-                        {
-                            packageArray.map(packageType => <option key={`packageType--${packageType.id}`} value={packageType.id}>{packageType.name} Price: {packageType.price.toLocaleString('en-US', {
-                                style: 'currency',
-                                currency: 'USD',
-                              })} </option>)
-                        }
-                    </select>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Submission:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Please paste a link to your google doc"
-                        value={submission.description}
-                        onChange={(evt) => {
-                            const copy = { ...submission }
-                            copy.googleDocument = evt.target.value
-                            update(copy)
-
-
-                        }} />
-                </div>
-            </fieldset> 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Request for Specific Feedback:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Please tell me specific problem areas in your writing."
-                        value={submission.description}
-                        onChange={(evt) => {
-                            const copy = { ...submission }
-                            copy.specificFeedback = evt.target.value
-                            update(copy)
-
-
-                        }} />
-                </div>
-            </fieldset> 
-            <button
-                onClick={
-                    (clickEvent) => { handleSaveButtonClick(clickEvent) }
-                }
-                className="btn btn-primary">
-                Submit Your Brilliance!
-            </button>
+          <h2 className="submissionForm__title">Creative Writing Submission Form</h2>
+      
+          <fieldset>
+            <div className="form-group">
+              <select
+                value={submission.tutorName}
+                onChange={(evt) => {
+                  const copy = { ...submission };
+                  copy.tutorId = parseInt(evt.target.value);
+                  update(copy);
+                }}
+                className="form-control"
+              >
+                <option value="0">List of Tutors</option>
+                {tutorArray.map((tutorObject) => (
+                  <option
+                    key={`tutorObject--${tutorObject.id}`}
+                    value={tutorObject.id}
+                  >
+                    {tutorObject.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </fieldset>
+      
+          <fieldset>
+            <div className="form-group">
+              <select
+                value={submission.packageId}
+                onChange={(evt) => {
+                  const copy = { ...submission };
+                  copy.packageId = parseInt(evt.target.value);
+                  update(copy);
+                }}
+                className="form-control"
+              >
+                <option value="0">Select Your Package</option>
+                {packageArray.map((packageType) => (
+                  <option
+                    key={`packageType--${packageType.id}`}
+                    value={packageType.id}
+                  >
+                    {packageType.name} Price:{" "}
+                    {packageType.price.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </fieldset>
+      
+          <fieldset>
+            <div className="form-group">
+              <label htmlFor="description">Submission:</label>
+              <input
+                required
+                autoFocus
+                type="text"
+                className="form-control"
+                placeholder="Please paste a link to your Google Doc"
+                value={submission.description}
+                onChange={(evt) => {
+                  const copy = { ...submission };
+                  copy.googleDocument = evt.target.value;
+                  update(copy);
+                }}
+              />
+            </div>
+          </fieldset>
+      
+          <fieldset>
+            <div className="form-group">
+              <label htmlFor="specificFeedback">Request for Specific Feedback:</label>
+              <textarea
+                required
+                className="form-control"
+                placeholder="Please tell me specific problem areas in your writing."
+                value={submission.specificFeedback}
+                onChange={(evt) => {
+                  const copy = { ...submission };
+                  copy.specificFeedback = evt.target.value;
+                  update(copy);
+                }}
+              />
+            </div>
+          </fieldset>
+      
+          <button
+            onClick={(clickEvent) => {
+              handleSaveButtonClick(clickEvent);
+            }}
+            className="btn btn-primary"
+          >
+            Submit Your Brilliance!
+          </button>
         </form>
-    )
+      );
+      
 }
