@@ -81,7 +81,6 @@ const getStudentMessages = () => {
     const correctStudentMessage = studentMessages.filter(
       (studentMessager) =>
       
-        studentMessager.userId === writingUserObject.id ||
         studentMessager.tutorId === writingUserObject.id
     );
     setFilterStudent(correctStudentMessage);
@@ -97,6 +96,10 @@ const getStudentMessages = () => {
     setFilterTutor(correctTutorMessage);
   }, [tutorMessages]);
 
+const individualMessageCounter = filteredStudentMessages.length
+const individualStudentMessageCounter = filteredTutorMessages.length
+
+
   return (
     <>
       <h2>Messages</h2>
@@ -106,6 +109,8 @@ const getStudentMessages = () => {
             <div> {tutorMessager?.tutorMessage}</div>
             <div> Sincerely, {tutorMessager?.user?.name} </div>
           <footer>{deleteButton(tutorMessager)}</footer>
+   
+          
           </section>
         ))}
       </article>
@@ -122,11 +127,12 @@ const getStudentMessages = () => {
 
       {!writingUserObject.staff ? (
         <button onClick={() => navigate("/messageFormStudent")}>
-          Click here to send a message!
+         ` Click here to send a message!`
+
         </button>
       ) : (
         <button onClick={() => navigate("/messageFormTutor")}>
-        Click here to send a message!
+         ` Click here to send a message!`
       </button>
       )}
     </>

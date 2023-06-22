@@ -48,7 +48,7 @@ export const TutorList = () => {
   }, []);
 
   return  <>
-  <h2>List of Tutors</h2>
+  <h2 className="tutorHeader">Tutors</h2>
 
 <div className="tutor-cards">
   {tutors.map((tutor) => (
@@ -64,7 +64,7 @@ export const TutorList = () => {
       <div className="specialtyTutor">Specialty: {tutor.specialty}</div>
       <div className="bookTutor">Favorite Book: {tutor.favoriteBook}</div>
       <div className="quoteTutor">
-        Meaningful Literary Quote: "{tutor.writingQuote}"
+        Literary Quote:<br/> "{tutor.writingQuote}"
       </div>
       <footer className="deleteButtonTutor">
         {tutor?.user?.name === writingUserObject.name || writingUserObject.admin ? (
@@ -81,6 +81,15 @@ export const TutorList = () => {
       <article className="packageInformation">
       <button onClick={() => navigate("/packages")}>View Packages</button>
       </article>
+     {
+                  writingUserObject.admin ?
+(          
+   
+      <article className="packageInformation">
+      <button onClick={() => navigate("/tutorForm")}>New Tutor</button>
+      </article>
+    ) : ""
+}
     </>
 };
 

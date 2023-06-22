@@ -50,6 +50,7 @@
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    font-weight: normal; /* Remove bold style */
   }
   
   textarea.form-control {
@@ -86,11 +87,27 @@
       no-repeat right 10px center/12px 8px;
     background-color: #fff;
     cursor: pointer;
+    opacity: .7;
   }
   
-  .form-group.select select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  .form-group.select select::-ms-expand,
+  .form-group.select select::-webkit-select-arrow {
+    display: none;
   }
+  
+  .form-group.select select.student-name,
+  .form-group.select select.package,
+  .form-group.select select.tutor-name {
+    font-family: inherit;
+  }
+  
+  .label-bold {
+    font-weight: bold;
+  }
+
+.form-control.student-name::placeholder {
+    opacity: 0.7; 
+  }
+  
+  
   

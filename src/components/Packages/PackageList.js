@@ -48,13 +48,13 @@ export const PackageList = () => {
 
   return (
     <>
-      <h2>List of Packages</h2>
+      <h2 className="packageHeader">Packages</h2>
 
       <article className="packages">
         {packages.map((packaged) => (
          
           <section className="package" key={packaged.id}>
-            <div> {packaged.name}</div>
+            <div className="packageName"> {packaged.name}</div>
             <div>{packaged.price.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',

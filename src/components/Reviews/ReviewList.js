@@ -6,7 +6,8 @@ import "./ReviewList.css"
 export const ReviewList = () => {
     const [reviews, displayReview ] = useState([])
     const [tutors, setTutors] = useState([])
-
+    const localWritingUser = localStorage.getItem("writing_user")
+    const writingUserObject = JSON.parse(localWritingUser)
     const navigate = useNavigate()
 
     const getAllTutors = () => {
@@ -34,7 +35,27 @@ export const ReviewList = () => {
       }, []);
 
 
-
+      const deleteButton = (review) => {
+        if (writingUserObject.admin) {
+          return (
+            <button
+              onClick={() => {
+                fetch(`http://localhost:8088/reviews/${review.id}`, {
+                  method: "DELETE"
+                })
+                  .then(() => {
+                    getAllReviews()
+                  });
+              }}
+              className="submission__delete"
+            >
+              Delete
+            </button>
+          );
+        } else {
+          return " ";
+        }
+      };
 
 
     return <>
@@ -49,7 +70,9 @@ export const ReviewList = () => {
           {/* <div>{tutor.name}</div> */}
           <div>{review.message}</div>
           {/* <footer>{deleteButton(tutorMessager)}</footer> */}
+          <footer>{ deleteButton(review)} </footer>
         </section>
+
       );
     })}
   </article>
@@ -57,6 +80,8 @@ export const ReviewList = () => {
   <button onClick={() => navigate("/reviewForm")}>
     Submit Review!
   </button>
+
+  
 </>
 }
 

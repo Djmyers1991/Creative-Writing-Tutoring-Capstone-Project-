@@ -96,13 +96,13 @@ export const CompletedSubmissionForm = () => {
             <h2 className="submissionForm__title">Completed Creative Writing Submission Form</h2>
               
             <fieldset>
-                <div className="form-group">
-                    <select value={completedSubmission.studentName} onChange={(evt) => {
+                <div className="form-group select">
+                <label className="label-bold" htmlFor="studentName">Student:</label>                    <select value={completedSubmission.studentName} onChange={(evt) => {
                         const copy = { ...completedSubmission }
                         copy.userId = parseInt(evt.target.value)
                         update(copy)
                     }}>
-                        <option value="0">Student List</option>
+                        <option value="0">Name</option>
                         {
                             studentArray.map(studentObject => <option key={`studentObject--${studentObject.id}`} value={studentObject.id}>{studentObject.name}</option>)
                         }
@@ -115,9 +115,9 @@ export const CompletedSubmissionForm = () => {
     <input
       required
       autoFocus
-      type="text"
+      type="number"
       className="form-control"
-      placeholder="Outstanding Submission Number"
+      placeholder="Submission Number"
       value={completedSubmission.submissionId}
       onChange={(evt) => {
         const copy = { ...completedSubmission };
@@ -129,8 +129,7 @@ export const CompletedSubmissionForm = () => {
 </fieldset>
             <fieldset>
                 <div className="form-group select">
-                    Reviewer:
-                    <select value={completedSubmission.tutorName} onChange={(evt) => {
+                <label className="label-bold" htmlFor="studentName">Reviewer:</label>                    <select value={completedSubmission.tutorName} onChange={(evt) => {
                         const copy = { ...completedSubmission }
                         copy.tutorId = parseInt(evt.target.value)
                         update(copy)
@@ -145,8 +144,7 @@ export const CompletedSubmissionForm = () => {
 
             <fieldset>
                 <div className="form-group select">
-                    Package:
-                    <select className="form-group select" value={completedSubmission.packageId} onChange={(evt) => {
+                <label className="label-bold" htmlFor="studentName">Package:</label>                    <select className="form-group select" value={completedSubmission.packageId} onChange={(evt) => {
                         const copy = { ...completedSubmission }
                         copy.packageId = parseInt(evt.target.value)
                         update(copy)
@@ -186,7 +184,7 @@ export const CompletedSubmissionForm = () => {
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Please tell me specific problem areas in your writing."
+                        placeholder="Try your best to be kind."
                         value={completedSubmission.specificFeedback}
                         onChange={(evt) => {
                             const copy = { ...completedSubmission }

@@ -17,6 +17,7 @@ import { ReviewList } from "../Reviews/ReviewList"
 import { ReviewForm } from "../Reviews/ReviewForm"
 import { HomePage } from "../auth/HomePage"
 import { App, ContainerSort } from "../auth/DragnDrop/BookClubList"
+import { TutorForm } from "../Tutors/TutorForm"
 
 export const ApplicationViews = () => {
     const localWritingUser = localStorage.getItem("writing_user");
@@ -47,6 +48,8 @@ export const ApplicationViews = () => {
                 <Route path= "reviewForm" element={ <ReviewForm />} />
                 <Route path= "homePage" element={ <HomePage />} />
                 <Route path= "bookList" element={ <App />} />
+                <Route path= "tutorForm" element={ <TutorForm />} />
+
 
 
 

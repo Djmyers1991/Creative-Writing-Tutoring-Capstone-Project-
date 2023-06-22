@@ -6,8 +6,8 @@
 .package {
     background: lightcyan;
     ;
-    border: 1px dotted darkmagenta;
-    padding: .70rem;
+    border: 2px solid lightblue;
+    border-radius: 10px;    padding: .70rem;
     margin: 0.5rem; 
 }
 
@@ -39,4 +39,14 @@ article {
   button:hover {
     background-color: #45a049;
   }
-  
+  .packageHeader{
+    display: flex;
+    justify-content: center;
+    font-family: Georgia;
+    font-size: 30px;
+    color: coral;
+  }
+
+  .packageName{
+    font-size: large;
+  }
