@@ -90,7 +90,6 @@ const getStudentMessages = () => {
   useEffect(() => {
     const correctTutorMessage = tutorMessages.filter(
       (tutorMessager) =>
-        tutorMessager.userId === writingUserObject.id ||
         tutorMessager.studentId === writingUserObject.id
     );
     setFilterTutor(correctTutorMessage);
@@ -127,12 +126,12 @@ const individualStudentMessageCounter = filteredTutorMessages.length
 
       {!writingUserObject.staff ? (
         <button onClick={() => navigate("/messageFormStudent")}>
-         ` Click here to send a message!`
+          Send a message!
 
         </button>
       ) : (
         <button onClick={() => navigate("/messageFormTutor")}>
-         ` Click here to send a message!`
+          Send a message!
       </button>
       )}
     </>

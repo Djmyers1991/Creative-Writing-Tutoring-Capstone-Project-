@@ -1,6 +1,8 @@
 import { Link, useNavigate  } from "react-router-dom";
 import "./NavBar.css";
 import { useEffect, useState } from "react";
+import { SubmissionContainer } from "../Submissions/SubmissionContainer";
+import { SubmissionCounter } from "../Inbox/SubmissionCounter";
 
 
 export const NavBar = () => {
@@ -14,8 +16,10 @@ export const NavBar = () => {
     const [filteredTutorMessages, setFilterTutor] = useState([]);
     const localWritingUser = localStorage.getItem("writing_user");
     const writingUserObject = JSON.parse(localWritingUser);
+    const individualMessageCounter = filteredStudentMessages.length
+    const individualStudentMessageCounter = filteredTutorMessages.length
+    const completedSubmissionsCounter = filteredCompletedSubmissions.length
 
-    
 
     const getTutorMessages = () => {
       fetch("http://localhost:8088/tutorMessages?_expand=user")
@@ -32,15 +36,8 @@ export const NavBar = () => {
           setStudentMessages(studentMessageArray);
         });
     };
-    const [submissions, setSubmissions] = useState([]);
-    const [filteredSubmissions, setFiltered] = useState([]);
-    const individualMessageCounter = filteredStudentMessages.length
-    const individualStudentMessageCounter = filteredTutorMessages.length
-    const getAllSubmissions = () => fetch("http://localhost:8088/submissions?_expand=package&_expand=user")
-  .then((response) => response.json())
-  .then((submissionArray) => {
-    setSubmissions(submissionArray);
-  });
+   
+ 
 
   const getAllCompletedSubmissions = () => fetch("http://localhost:8088/completedSubmissions?_expand=package&_expand=user")
 .then((response) => response.json())
@@ -70,60 +67,20 @@ export const NavBar = () => {
       );
       setFilterTutor(correctTutorMessage);
     }, [tutorMessages]);
-
-
-
-
-
-
-
-
-
-
-    
   
-  useEffect(() => {
-    
-    getAllSubmissions();
-  }, []);
-
-  useEffect(() => {
-    const correctSubmissions = submissions.filter(
-      (submission) =>
-        submission.userId === writingUserObject.id ||
-        submission.tutorId === writingUserObject.id
-    );
-    setFiltered(correctSubmissions)
-  }, [submissions]);
-
   useEffect(() => {
     getAllCompletedSubmissions()
 },[])
 
 useEffect(()=> {
-    const correctSubmissions = completedSubmissions.filter(
+    const correctCompletedSubmissions = completedSubmissions.filter(
         (submission) =>
           submission.userId === writingUserObject.id ||
           submission.tutorId === writingUserObject.id
       );
-      setFilter(correctSubmissions)
+      setCompletedFilter(correctCompletedSubmissions)
     }, [completedSubmissions]
     )
-
- 
-const submissionsCounter = filteredSubmissions.length 
-const completedSubmissionsNumber = filteredCompletedSubmissions.length
-
-
-
-
-
-
-
-
-
-
-
 
     return (
       <ul className="navbar">
@@ -147,9 +104,7 @@ const completedSubmissionsNumber = filteredCompletedSubmissions.length
           </Link>
         </li>
         <li className="navbar__item active">
-          <Link className="navbar__link" to="/submissions">
-            Submissions {submissionsCounter}
-          </Link>
+        <SubmissionCounter />
         </li>
         {writingUserObject.staff ?  
         (<li className="navbar__item active">
@@ -162,12 +117,19 @@ const completedSubmissionsNumber = filteredCompletedSubmissions.length
         </Link>
       </li> )
 }
-
+{!writingUserObject.staff ? (
         <li className="navbar__item active">
           <Link className="navbar__link" to="/completedSubmissions">
-            Completed
+            Completed {completedSubmissionsCounter}
           </Link>
-        </li>
+        </li>) : (
+        <li className="navbar__item active">
+          <Link className="navbar__link" to="/completedSubmissions">
+            Completed 
+          </Link>
+        </li>)
+
+}
         <li className="navbar__item active">
           <Link className="navbar__link" to="/reviews">
             Reviews

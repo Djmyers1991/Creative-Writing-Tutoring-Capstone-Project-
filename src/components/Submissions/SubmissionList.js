@@ -8,8 +8,8 @@ import "./Submissions.css"
 export const SubmissionList = ({ searchTermState }) => {
   const [submissions, setSubmissions] = useState([]);
   const [filteredSubmissions, setFiltered] = useState([]);
- 
-
+  const [tutors, getTutors] = useState([])
+  const [filteredTutors, filterTutors]= useState([])
   const navigate = useNavigate();
   
 
@@ -22,6 +22,31 @@ export const SubmissionList = ({ searchTermState }) => {
   setSubmissions(submissionArray);
 });
 
+const getAllTutors = () => {
+  fetch(`http://localhost:8088/submissions?_expand=user`)
+    .then((response) => response.json())
+    .then((tutorArray) => {
+      getTutors(tutorArray);
+    });
+};
+
+useEffect(() => {
+
+getAllTutors()
+
+},
+[]
+)
+
+// useEffect(() => {
+//   const correctTutor = tutors.find(
+//     (tutor) =>
+//       submission.userId === writingUserObject.id ||
+//       submission.tutorId === writingUserObject.id
+//   );
+//   filterTutors(correctTutor)
+   
+// }, [tutors]);
   
   useEffect(() => {
     
@@ -35,7 +60,10 @@ export const SubmissionList = ({ searchTermState }) => {
         submission.tutorId === writingUserObject.id
     );
     setFiltered(correctSubmissions)
+     
   }, [submissions]);
+
+  
 
   useEffect(() => {
     const searchedSubmissions = filteredSubmissions.filter((submission) => {
@@ -44,6 +72,7 @@ export const SubmissionList = ({ searchTermState }) => {
         .startsWith(searchTermState.toLowerCase());
     });
     setFiltered(searchedSubmissions);
+
   }, [searchTermState]);
 
 

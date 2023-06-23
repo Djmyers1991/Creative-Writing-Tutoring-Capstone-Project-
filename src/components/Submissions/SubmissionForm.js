@@ -20,7 +20,7 @@ export const SubmissionForm = () => {
     const [tutorArray, changeTutorState] = useState([])
     const [packageArray, changePackageState] = useState([])
 
-
+   
     /*
         TODO: Use the useNavigation() hook so you can redirect
         the user to the ticket list
@@ -31,7 +31,7 @@ export const SubmissionForm = () => {
 
     const navigate = useNavigate()
     useEffect(() => {
-        fetch(`http://localhost:8088/users?isStaff=true`)
+        fetch(`http://localhost:8088/tutorInformation?_expand=user&isStaff=true`)
             .then(response => response.json())
             .then((tutorObjects) => {
                 changeTutorState(tutorObjects)
@@ -91,10 +91,10 @@ export const SubmissionForm = () => {
                 <option value="0">List of Tutors</option>
                 {tutorArray.map((tutorObject) => (
                   <option
-                    key={`tutorObject--${tutorObject.id}`}
+                    key={`tutorObject--${tutorObject?.user?.id}`}
                     value={tutorObject.id}
                   >
-                    {tutorObject.name}
+                    {tutorObject?.user?.name}
                   </option>
                 ))}
               </select>

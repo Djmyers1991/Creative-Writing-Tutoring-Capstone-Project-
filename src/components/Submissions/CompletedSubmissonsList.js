@@ -59,8 +59,6 @@ useEffect(()=> {
           paymentReceived: true
         };
     
-        
-
         return fetch(`http://localhost:8088/completedSubmissions/${submission.id}`, {
           method: "PUT",
           headers: {
@@ -72,7 +70,27 @@ useEffect(()=> {
         .then(getAllCompletedSubmissions);
       }
       
-
+      const deleteButton = (submission) => {
+        if (!writingUserObject.staff) {
+          return (
+            <button
+              onClick={() => {
+                fetch(`http://localhost:8088/completedSubmissions/${submission.id}`, {
+                  method: "DELETE"
+                })
+                  .then(() => {
+                    getAllCompletedSubmissions()
+                  });
+              }}
+              className="submission__delete"
+            >
+              Delete
+            </button>
+          );
+        } else {
+          return " ";
+        }
+      };
       return (
         <>
           <h2>Finished Submissions</h2>
@@ -102,6 +120,7 @@ useEffect(()=> {
                   <div>Specific Feedback: {submission.specificFeedback}</div>
                   <div> Date Completed: {submission.dateCompleted}</div>
                   <footer>{canClose(submission)}</footer>
+                  <footer>{deleteButton(submission)}</footer>
                 </section>
               ) : " "
             ))}

@@ -8,6 +8,10 @@ export const CompletedSubmissionForm = () => {
         TODO: Add the correct default properties to the
         initial state object
     */
+
+        const localWritingUser = localStorage.getItem("writing_user");
+        const writingUserObject = JSON.parse(localWritingUser);
+
     const [completedSubmission, update] = useState({
         userId: 0,
         paymentReceived: true,
@@ -17,13 +21,14 @@ export const CompletedSubmissionForm = () => {
         tutorId: 0,
         dateCompleted: null,
         paymentReceived: true,
-        submissionId: "",
+        submissionId: 0,
         isFinished: false
     })
 
     const [tutorArray, changeTutorState] = useState([])
     const [packageArray, changePackageState] = useState([])
     const [studentArray, changeStudentState] = useState([])
+    const [submissions, findRightSubmission] = useState([])
 
 
     /*
@@ -58,6 +63,8 @@ export const CompletedSubmissionForm = () => {
                 changePackageState(packageTypes)
             })
     }, [])
+
+  
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
