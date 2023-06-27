@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom"
 
 
 
-
 export const SubmissionEdit = () => {
 
     const localWritingUser = localStorage.getItem("writing_user")
@@ -41,8 +40,6 @@ const writingUserObject = JSON.parse(localWritingUser)
                 navigate("/submissions")
             })
     }
-
-
 
 
 

@@ -18,6 +18,8 @@ import { ReviewForm } from "../Reviews/ReviewForm"
 import { HomePage } from "../auth/HomePage"
 import { App, ContainerSort } from "../auth/DragnDrop/BookClubList"
 import { TutorForm } from "../Tutors/TutorForm"
+import { API } from "../API/API"
+import { PackageEdit } from "../Packages/EditPackage"
 
 export const ApplicationViews = () => {
     const localWritingUser = localStorage.getItem("writing_user");
@@ -49,6 +51,10 @@ export const ApplicationViews = () => {
                 <Route path= "homePage" element={ <HomePage />} />
                 <Route path= "bookList" element={ <App />} />
                 <Route path= "tutorForm" element={ <TutorForm />} />
+                <Route path= "API" element={ <API />} />
+                <Route path="packages/:packageId/edit" element={ <PackageEdit />} />
+
+
 
 
 
@@ -71,6 +77,5 @@ export const ApplicationViews = () => {
 
 
 }
-
 
 

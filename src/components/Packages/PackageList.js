@@ -32,6 +32,25 @@ export const PackageList = () => {
     }
   };
 
+  const editButton = (packaged) => {
+    if (writingUserObject.admin) {
+      return (
+        <button
+          onClick={() => {
+            navigate(`/packages/${packaged.id}/edit`);
+          }}
+        >
+          Edit
+        </button>
+      );
+    } else {
+      return " ";
+    }
+  };
+  
+
+
+
   const getAllPackages = () => {
     fetch(`http://localhost:8088/packages`)
       .then((response) => response.json())
@@ -62,7 +81,12 @@ export const PackageList = () => {
             <div className="description">{packaged.description}</div>
             <footer>
               {
-                deleteButton(packaged)
+                deleteButton(packaged) 
+              }
+            </footer>
+            <footer>
+              {
+                editButton(packaged) 
               }
             </footer>
           </section>

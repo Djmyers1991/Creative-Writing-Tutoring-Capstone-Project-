@@ -8,8 +8,7 @@ import "./Submissions.css"
 export const SubmissionList = ({ searchTermState }) => {
   const [submissions, setSubmissions] = useState([]);
   const [filteredSubmissions, setFiltered] = useState([]);
-  const [tutors, getTutors] = useState([])
-  const [filteredTutors, filterTutors]= useState([])
+  const [users, findUsers] = useState([])
   const navigate = useNavigate();
   
 
@@ -22,36 +21,26 @@ export const SubmissionList = ({ searchTermState }) => {
   setSubmissions(submissionArray);
 });
 
-const getAllTutors = () => {
-  fetch(`http://localhost:8088/submissions?_expand=user`)
-    .then((response) => response.json())
-    .then((tutorArray) => {
-      getTutors(tutorArray);
-    });
-};
+
 
 useEffect(() => {
+  fetch(`http://localhost:8088/users`)
+    .then((response) => response.json())
+    .then((userArray) => {
+      findUsers(userArray);
+    })
+    
+}, []);
 
-getAllTutors()
 
-},
-[]
-)
 
-// useEffect(() => {
-//   const correctTutor = tutors.find(
-//     (tutor) =>
-//       submission.userId === writingUserObject.id ||
-//       submission.tutorId === writingUserObject.id
-//   );
-//   filterTutors(correctTutor)
-   
-// }, [tutors]);
   
   useEffect(() => {
     
     getAllSubmissions();
   }, []);
+
+ 
 
   useEffect(() => {
     const correctSubmissions = submissions.filter(
@@ -114,63 +103,60 @@ getAllTutors()
 
 
 
-  return (
-    <>
-      <h2>Submissions</h2>
-      <article className="submissions">
-        {filteredSubmissions.map((submission) => (
+return (
+  <>
+    <h2>Submissions</h2>
+    <article className="submissions">
+      {filteredSubmissions.map((submission) => {
+        const tutorName = users.find((user) => user.id === submission.tutorId);
+
+        return (
           <section className="package" key={submission.id}>
-           
-              <Link to={`/submissions/${submission.id}/edit`}>
-                Submission {submission.id}
-              </Link>
-            
-           
+            <Link to={`/submissions/${submission.id}/edit`}>
+              Submission {submission.id}
+            </Link>
             <div>Name: {submission?.user?.name}</div>
+            <div>Tutor Name: {tutorName.name}</div>
             <div>Email: {submission?.user?.email}</div>
             <div>Package Selected: {submission?.package?.name}</div>
             <div>
-                    {submission.googleDocument && (
-                      <a
-                        href={
-                          submission.googleDocument.startsWith("http://") ||
-                          submission.googleDocument.startsWith("https://")
-                            ? submission.googleDocument
-                            : `http://${submission.googleDocument}`
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Submission
-                      </a>
-                    )}
-                  </div>            <div>Specific Feedback: {submission.specificFeedback}</div>
+              {submission.googleDocument && (
+                <a
+                  href={
+                    submission.googleDocument.startsWith("http://") ||
+                    submission.googleDocument.startsWith("https://")
+                      ? submission.googleDocument
+                      : `http://${submission.googleDocument}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Submission
+                </a>
+              )}
+            </div>
+            <div>Specific Feedback: {submission.specificFeedback}</div>
+            <footer>{deleteButton(submission)}</footer>
             <footer>
-        {
-      deleteButton(submission)
-        }
-        </footer>
-
-        <footer>
-            {writingUserObject.staff && (
-              <button onClick={() => navigate("/submissionCompletedForm")}>
-                Final Submission!
-              </button>
-            )}
-          </footer>
-    
+              {writingUserObject.staff && (
+                <button onClick={() => navigate("/submissionCompletedForm")}>
+                  Final Submission!
+                </button>
+              )}
+            </footer>
           </section>
-        ))}
-      </article>
-      <footer>
-        {!writingUserObject.staff ? (
-          <button onClick={() => navigate("/submissionForm")}>
-            Submit Your Work!
-          </button>
-        ) : (
-          ""
-        )}
-      </footer>
-    </>
-  );
-};
+        );
+      })}
+    </article>
+    <footer>
+      {!writingUserObject.staff ? (
+        <button onClick={() => navigate("/submissionForm")}>
+          Submit Your Work!
+        </button>
+      ) : (
+        ""
+      )}
+    </footer>
+  </>
+);
+      }

@@ -92,7 +92,7 @@ export const SubmissionForm = () => {
                 {tutorArray.map((tutorObject) => (
                   <option
                     key={`tutorObject--${tutorObject?.user?.id}`}
-                    value={tutorObject.id}
+                    value={tutorObject?.user?.id}
                   >
                     {tutorObject?.user?.name}
                   </option>
