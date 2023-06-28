@@ -7,6 +7,8 @@ export const SubmissionSearch = ({ setterFunction }) => {
             <div>
                 <input className="searchBar"
                     onChange={(changeEvent) => {
+                        console.log(changeEvent.target.value);
+                        
                         if (changeEvent.target.value.length) {
                             setterFunction(changeEvent.target.value);
                         } else {
