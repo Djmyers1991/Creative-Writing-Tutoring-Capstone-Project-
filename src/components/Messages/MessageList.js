@@ -7,6 +7,7 @@ export const MessageList = () => {
 
   const [filteredStudentMessages, setFilterStudent] = useState([]);
   const [filteredTutorMessages, setFilterTutor] = useState([]);
+  const [users, findUser] = useState([])
   const localWritingUser = localStorage.getItem("writing_user");
   const writingUserObject = JSON.parse(localWritingUser);
   
@@ -24,12 +25,18 @@ const getStudentMessages = () => {
       setStudentMessages(studentMessageArray)
     })}
 
+    const getUsers = () => { 
+      fetch("http://localhost:8088/users")
+        .then((response) => response.json())
+        .then((userArray) => {
+          findUser(userArray)
+        })}
+
   const navigate = useNavigate();
 
 
   const deleteButton = (tutorMessager) => {
-    if (writingUserObject.staff) {
-      return (
+    return (
         <button
           onClick={() => {
             fetch(`http://localhost:8088/tutorMessages/${tutorMessager.id}`, {
@@ -43,11 +50,10 @@ const getStudentMessages = () => {
         >
           Delete
         </button>
-      );
-    } else {
-      return " ";
-    }
-  };
+      
+   
+    )}
+  ;
 
     const deleteButtonUser = (studentMessager) => {
     
@@ -78,6 +84,10 @@ const getStudentMessages = () => {
   }, [])
 
   useEffect(() => {
+    getUsers()
+    }, [])
+
+  useEffect(() => {
     const correctStudentMessage = studentMessages.filter(
       (studentMessager) =>
       
@@ -103,25 +113,31 @@ const individualStudentMessageCounter = filteredTutorMessages.length
     <>
       <h2>Messages</h2>
       <article className="tutorMessages">
-        {filteredTutorMessages.map((tutorMessager) => (
-          <section className="package" key={tutorMessager.id}>
-            <div> {tutorMessager?.tutorMessage}</div>
-            <div> Sincerely, {tutorMessager?.user?.name} </div>
-          <footer>{deleteButton(tutorMessager)}</footer>
-   
-          
-          </section>
-        ))}
-      </article>
+  {filteredTutorMessages.map((tutorMessager) => {
+    const tuturUser = users.find((user) => user.id === tutorMessager.studentId);
+
+    return (
+      <section className="package" key={tutorMessager.id}>
+        <header>Dear {tuturUser?.name}</header>
+        <div> {tutorMessager?.tutorMessage}</div>
+        <div> Sincerely, {tutorMessager?.user?.name} </div>
+        <footer>{deleteButton(tutorMessager)}</footer>
+      </section>
+    );
+  })}
+</article>
       <article className="studentMessages">
-        {filteredStudentMessages.map((studentMessager) => (
+        {filteredStudentMessages.map((studentMessager) => {
+          const studentUser = users.find((user) => user.id === studentMessager.tutorId);
+          return ( 
           <section className="package" key={studentMessager.id}>
+            <header>Dear {studentUser?.name},</header>
             <div>{studentMessager?.studentMessage}</div>
             <div>Sincerely, {studentMessager?.user?.name}</div>
             <footer>{deleteButtonUser(studentMessager)}</footer>
 
           </section>
-        ))}
+        )})}
       </article>
 
       {!writingUserObject.staff ? (
