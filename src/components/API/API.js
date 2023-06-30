@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./API.css"
 
 export const API = () => {
   const [author, setAuthor] = useState("");
@@ -69,9 +70,10 @@ export const API = () => {
       {authorBooks.length > 0 ? (
         <article>
           {authorBooks.map((book, index) => (
-            <div key={index}>
+            <div key={index} >
               <div>{book.coverId && (
-                <img src={getBookCoverUrl(book.coverId)} alt="Book Cover" />
+                <img 
+                src={getBookCoverUrl(book.coverId)} alt="Book Cover" />
               )}</div>
               <h2>Title: {book.title}</h2>
               <h3>Author: {formatAuthors(book.authorName)}</h3>
