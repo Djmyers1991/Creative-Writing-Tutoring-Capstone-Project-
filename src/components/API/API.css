@@ -1,0 +1,96 @@
+.book-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    border: 2px solid lightblue;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+  }
+  
+  .book-card {
+    width: 280px;
+    height: 360px;
+    border: 1px solid lightblue;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .book-card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid lightblue;
+    border-top-color: transparent;
+    border-bottom-width: 0;
+  }
+  
+  .book-image {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+.book-cover {
+  width: 50%; /* Make the image fill the container */
+  max-height: 200px; /* Adjust the max-height to control the image size */
+  object-fit: cover; /* Ensure the image fills the container and maintains aspect ratio */
+}
+  
+  .book-content {
+    text-align: center;
+  }
+  
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+    font-family: georgia;
+  }
+  
+  h2 {
+    font-size: 14px; /* Decrease the font size for the title */
+    font-weight: bold;
+  }
+  
+  h3 {
+    font-size: 12px; /* Decrease the font size for the author */
+    color: #888;
+  }
+  
+  h4 {
+    font-size: 11px; /* Decrease the font size for pages and publication date */
+    color: #aaa;
+  }
+  
+  p {
+    font-size: 10px; /* Decrease the font size for the first sentence */
+    color: #666;
+  }
+  
+  .first-line {
+    font-size: 9px; /* Decrease the font size for the first sentence */
+    line-height: 12px; /* Adjust the line height for the first sentence */
+    margin-top: 8px; /* Adjust the margin top for the first sentence */
+  }
+
+  
+  .first-line {
+    /* Truncate the text with ellipsis */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Adjust the number of lines as needed */
+    -webkit-box-orient: vertical;
+    max-height: 5em; /* Adjust the height as needed */
+  }
+
+  
