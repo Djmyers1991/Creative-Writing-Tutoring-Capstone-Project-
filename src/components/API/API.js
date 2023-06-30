@@ -1,46 +1,62 @@
 import React, { useEffect, useState } from "react";
-import "./API.css"
+import "./API.css";
 
 export const API = () => {
   const [author, setAuthor] = useState("");
   const [authorBooks, setAuthorBooks] = useState([]);
+  const [debouncedAuthor, setDebouncedAuthor] = useState("");
 
   const fetchAuthorBooks = () => {
     const apiUrl = `https://openlibrary.org/search.json?author=${encodeURIComponent(
-      `"${author}"`
-    )}`;//the quotes around author ensure that we get the exact match. 
+      `"${debouncedAuthor}"`
+    )}`; //the quotes around author ensure that we get the exact match.
     fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        const books = data.docs.map(doc => ({
+      .then((response) => response.json())
+      .then((data) => {
+        const books = data.docs.map((doc) => ({
           title: doc.title,
           firstLine: doc.first_sentence,
           publicationYear: doc.first_publish_year,
           pageNumber: doc.number_of_pages_median,
           authorName: doc.author_name,
-          coverId: doc.cover_i // OLID of the book cover
+          coverId: doc.cover_i, // OLID of the book cover
         }));
         setAuthorBooks(books);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching author book data:", error);
       });
   };
 
   useEffect(() => {
-    if (author !== "") {
+    const timeoutId = setTimeout(() => {
+      setDebouncedAuthor(author);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [author]);
+
+  useEffect(() => {
+    if (debouncedAuthor !== "") {
       fetchAuthorBooks();
     } else {
       setAuthorBooks([]);
     }
-  }, [author]);
+  }, [debouncedAuthor]);
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     setAuthor(e.target.value);
     setAuthorBooks([]);
   };
-
-  const formatAuthors = authors => {
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + "...";
+  };
+  const formatAuthors = (authors) => {
     if (authors.length === 1) {
       return authors[0];
     } else if (authors.length === 2) {
@@ -52,13 +68,12 @@ export const API = () => {
     }
   };
 
-  const getBookCoverUrl = coverId => {
+  const getBookCoverUrl = (coverId) => {
     if (coverId) {
       return `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
     }
     return ""; // Return an empty string if coverId is not available
   };
-
   return (
     <div>
       <input
@@ -69,20 +84,32 @@ export const API = () => {
       />
       {authorBooks.length > 0 ? (
         <article>
-          {authorBooks.map((book, index) => (
-            <div key={index} >
-              <div>{book.coverId && (
-                <img 
-                src={getBookCoverUrl(book.coverId)} alt="Book Cover" />
-              )}</div>
-              <h2>Title: {book.title}</h2>
-              <h3>Author: {formatAuthors(book.authorName)}</h3>
-              <h4>Pages: {book.pageNumber}</h4>
-              <h4>Publication Date: {book.publicationYear}</h4>
-              {book.firstLine && <p>First Line: {book.firstLine}</p>}
-              
-            </div>
-          ))}
+          <div className="book-card-container">
+            {authorBooks.map((book, index) => (
+              <div key={index} className="book-card">
+                <div className="book-image">
+                  {book.coverId && (
+                    <img
+                      className="book-cover"
+                      src={getBookCoverUrl(book.coverId)}
+                      alt="Book Cover"
+                    />
+                  )}
+                </div>
+                <div className="book-content">
+                  <h2>Title: {book.title}</h2>
+                  <h3>Author: {formatAuthors(book.authorName)}</h3>
+                  <h4>Pages: {book.pageNumber}</h4>
+                  <h4>Publication Date: {book.publicationYear}</h4>
+                  {book.firstLine && (
+                    <p className="first-line">
+    First Line: {truncateText(book.firstLine, 100)}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </article>
       ) : (
         <p>No books found for the author.</p>
