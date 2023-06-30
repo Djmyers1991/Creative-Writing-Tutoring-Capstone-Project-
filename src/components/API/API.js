@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from "react";
+
 export const API = () => {
   const [author, setAuthor] = useState("");
   const [authorBooks, setAuthorBooks] = useState([]);
+
   const fetchAuthor = () => {
     const apiUrl = `https://openlibrary.org/search.json?author=${encodeURIComponent(author)}`;
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        const books = data.docs.map(doc => doc.title);
+        const books = data.docs.map(doc => ({
+          title: doc.title,
+          firstLine: doc.first_sentence,
+        }));
         setAuthorBooks(books);
       })
       .catch(error => {
         console.error("Error fetching author data:", error);
       });
   };
+
   useEffect(() => {
     if (author !== "") {
       fetchAuthor();
     }
   }, [author]);
+
   return (
     <div>
       <input
@@ -28,38 +35,17 @@ export const API = () => {
         placeholder="Enter author name"
       />
       {authorBooks.length > 0 ? (
-        <ul>
+        <article>
           {authorBooks.map((book, index) => (
-            <li key={index}>{book}</li>
+            <div key={index}>
+              <h3>{book.title}</h3>
+              <p>{book.firstLine}</p>
+            </div>
           ))}
-        </ul>
+        </article>
       ) : (
         <p>No books found for the author.</p>
       )}
     </div>
   );
 };
-
-
-// const handleSaveButtonClick = (event) => {
-//   event.preventDefault()
-
-//   const bookListToSendToAPI = {
-//       userId: writingUserObject.id,
-//       bookTitle: bookList.bookTitle,
-
-//   }
-//   fetch(`http://localhost:8088/bookList`, {
-//       method: "POST",
-//       headers: {
-//           "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(messageToSendToAPI)
-//   })
-//       .then(response => response.json())
-//       .then(() => {
-//           navigate("/bookList")
-
-//       })
-
-// }

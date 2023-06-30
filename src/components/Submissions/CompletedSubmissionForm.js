@@ -29,8 +29,14 @@ export const CompletedSubmissionForm = () => {
     const [packageArray, changePackageState] = useState([])
     const [studentArray, changeStudentState] = useState([])
     const [submissions, findRightSubmission] = useState([])
+    const [filteredSubmission, findRightFilteredSubmission] = useState([])
 
+//I need to get all of the submissions. 
+//I need to filter through them so that only the submissions appear
+//if the tutor id matches the writing object id
+//that way, only the right submissions will appear in the drop down.
 
+//I need to create a dropdown the dropd and I need to f
     /*
         TODO: Use the useNavigation() hook so you can redirect
         the user to the ticket list
@@ -44,6 +50,14 @@ export const CompletedSubmissionForm = () => {
             .then(response => response.json())
             .then((tutorObjects) => {
                 changeTutorState(tutorObjects)
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch(`http://localhost:8088/submissions`)
+            .then(response => response.json())
+            .then((submissionArray) => {
+                findRightSubmission(submissionArray)
             })
     }, [])
 
@@ -64,7 +78,18 @@ export const CompletedSubmissionForm = () => {
             })
     }, [])
 
-  
+  useEffect(()=>{
+    fetch("http://localhost:8088/submissions")
+    .then((response) => response.json())
+    .then((filteredSubmissionArray) => {
+      const correctSubmissions = filteredSubmissionArray.filter(
+        (submission) =>
+          submission.tutorId === writingUserObject.id
+      );
+      findRightFilteredSubmission(correctSubmissions);
+    })
+
+  })
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
@@ -104,7 +129,8 @@ export const CompletedSubmissionForm = () => {
               
             <fieldset>
                 <div className="form-group select">
-                <label className="label-bold" htmlFor="studentName">Student:</label>                    <select value={completedSubmission.studentName} onChange={(evt) => {
+                <label className="label-bold" htmlFor="studentName">Student:</label>                 
+                   <select value={completedSubmission.studentName} onChange={(evt) => {
                         const copy = { ...completedSubmission }
                         copy.userId = parseInt(evt.target.value)
                         update(copy)
@@ -117,21 +143,19 @@ export const CompletedSubmissionForm = () => {
                 </div>
             </fieldset>
             <fieldset>
-  <div className="form-group">
+  <div className="form-group select">
     <label htmlFor="submissionNumber">Submission Identification:</label>
-    <input
-      required
-      autoFocus
-      type="number"
-      className="form-control"
-      placeholder="Submission Number"
-      value={completedSubmission.submissionId}
-      onChange={(evt) => {
-        const copy = { ...completedSubmission };
-        copy.submissionId = parseInt(evt.target.value);
-        update(copy);
-      }}
-    />
+<select value={completedSubmission.submissionId} onChange={(evt) => {
+    const copy = {...completedSubmission}
+    copy.submissionId = parseInt(evt.target.value)
+
+}}>    
+    <option value="0">Id</option>
+    {
+        filteredSubmission.map(submissionObject => <option key={`submissionObject--${submissionObject.id}`} value={submissionObject.id}>{submissionObject.id}</option>)
+    }
+    </select>
+
   </div>
 </fieldset>
             <fieldset>
