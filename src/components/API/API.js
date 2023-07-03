@@ -2,58 +2,58 @@ import React, { useEffect, useState } from "react";
 import "./API.css";
 import { APISearch } from "./APISearch";
 
-export const API = ({searchTermState}) => {
+export const API = ({ searchTermState }) => {
   const [author, setAuthor] = useState("");
   const [authorBooks, setAuthorBooks] = useState([]);
   const [debouncedAuthor, setDebouncedAuthor] = useState("");
-  const [bookLength, setLength] = useState(false)
+  const [bookLength, setLength] = useState(false);
 
 
-
-  const fetchAuthorBooks = (  ) => {
+  const fetchAuthorBooks = () => {
     const apiUrl = `https://openlibrary.org/search.json?author=${encodeURIComponent(
       `"${debouncedAuthor}"`
     )}`; //the quotes around author ensure that we get the exact match.
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        const books = data.docs.map((doc) => ({
-          title: doc.title,
-          firstLine: doc.first_sentence,
-          publicationYear: doc.first_publish_year,
-          pageNumber: doc.number_of_pages_median,
-          authorName: doc.author_name,
-          coverId: doc.cover_i, // OLID of the book cover
-        }));
+        const books = data.docs.map((doc) => {
+          const libraryLink =
+            doc.ia && doc.ia.length > 0
+              ? `https://archive.org/details/${doc.ia[1]}?&and[]=${encodeURIComponent(`language:${doc.language}`)}`
+              : "";
+  
+          return {
+            title: doc.title,
+            firstLine: doc.first_sentence,
+            publicationYear: doc.first_publish_year,
+            pageNumber: doc.number_of_pages_median,
+            authorName: doc.author_name,
+            coverId: doc.cover_i,
+            libraryLink,
+          };
+        });
+  
         setAuthorBooks(books);
       })
       .catch((error) => {
         console.error("Error fetching author book data:", error);
       });
   };
-
-useEffect( 
-  () => {
-    if(bookLength) {
-     const shortBooks = authorBooks.filter(book => book.pageNumber < 300 )
-      setAuthorBooks(shortBooks)
+  useEffect(() => {
+    if (bookLength) {
+      const shortBooks = authorBooks.filter((book) => book.pageNumber < 500);
+      setAuthorBooks(shortBooks);
+    } else {
+      fetchAuthorBooks();
     }
+  }, [bookLength]);
 
-  },
-
-  [bookLength]
-
-)
-
-
-useEffect (
-  () => {
-const searchedBooks = authorBooks.filter(book =>
-  book.title.toLowerCase().includes(searchTermState.toLowerCase()));
-  setAuthorBooks(searchedBooks)
-  },
-  [searchTermState]
-)
+  useEffect(() => {
+    const searchedBooks = authorBooks?.filter((book) =>
+      book.title.toLowerCase().includes(searchTermState.toLowerCase())
+    );
+    setAuthorBooks(searchedBooks);
+  }, [searchTermState]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -71,18 +71,20 @@ const searchedBooks = authorBooks.filter(book =>
     } else {
       setAuthorBooks([]);
     }
-  }, [debouncedAuthor]); 
+  }, [debouncedAuthor]);
 
   const handleInputChange = (e) => {
     setAuthor(e.target.value);
     setAuthorBooks([]);
   };
+
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) {
       return text;
     }
     return text.substring(0, maxLength) + "...";
   };
+
   const formatAuthors = (authors) => {
     if (authors.length === 1) {
       return authors[0];
@@ -101,26 +103,37 @@ const searchedBooks = authorBooks.filter(book =>
     }
     return ""; // Return an empty string if coverId is not available
   };
+
   return (
     <div>
-          <button
-          onClick={
-            () => {
-            setLength(true)}
-            }
-            >Under 300</button>
+      <a className="link create-account" href="https://archive.org/account/login.createaccount.php"><span>Create Account to Gain Access to Books</span> 
+      </a>
+      <div className="container">
+      <label>
+        <span className="toggle-label"> 
+        Under <span>  500</span>  Pages
+        </span>
+        <input
+          type="checkbox"
+          checked={bookLength}
+          onChange={() => setLength(!bookLength)}
+          className="toggle-checkbox"
+        />
+      </label>
+      <button className="add-to-booklist">Add to Booklist</button>
+
+      </div>
 
       <input
         type="text"
         value={author}
         onChange={handleInputChange}
-        placeholder="Enter author name"
+        placeholder="Enter Author's Name"
+        className="author-input"
       />
 
-      { (
-        <APISearch authorBooks={authorBooks} />
-      )
-      }
+      <APISearch authorBooks={authorBooks} />
+
       {authorBooks.length > 0 ? (
         <article>
           <div className="book-card-container">
@@ -142,8 +155,19 @@ const searchedBooks = authorBooks.filter(book =>
                   <h4>Publication Date: {book.publicationYear}</h4>
                   {book.firstLine && (
                     <p className="first-line">
-    Opening Sentence: {truncateText(book.firstLine, 100)}
+                      Opening Sentence: {truncateText(book.firstLine, 100)}
                     </p>
+                  )}
+                </div>
+                <div className="book-links">
+                  
+                  {book.libraryLink && (
+                    <a
+                      href={book.libraryLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+Click to See Inside                    </a>
                   )}
                 </div>
               </div>
@@ -151,9 +175,8 @@ const searchedBooks = authorBooks.filter(book =>
           </div>
         </article>
       ) : (
-        <p>No books found for the author.</p>
+        ""
       )}
     </div>
   );
 };
-
