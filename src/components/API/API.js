@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./API.css";
+import { APISearch } from "./APISearch";
 
-export const API = () => {
+export const API = ({searchTermState}) => {
   const [author, setAuthor] = useState("");
   const [authorBooks, setAuthorBooks] = useState([]);
   const [debouncedAuthor, setDebouncedAuthor] = useState("");
+  const [bookLength, setLength] = useState(false)
 
-  const fetchAuthorBooks = () => {
+
+
+  const fetchAuthorBooks = (  ) => {
     const apiUrl = `https://openlibrary.org/search.json?author=${encodeURIComponent(
       `"${debouncedAuthor}"`
     )}`; //the quotes around author ensure that we get the exact match.
@@ -28,6 +32,29 @@ export const API = () => {
       });
   };
 
+useEffect( 
+  () => {
+    if(bookLength) {
+     const shortBooks = authorBooks.filter(book => book.pageNumber < 300 )
+      setAuthorBooks(shortBooks)
+    }
+
+  },
+
+  [bookLength]
+
+)
+
+
+useEffect (
+  () => {
+const searchedBooks = authorBooks.filter(book =>
+  book.title.toLowerCase().includes(searchTermState.toLowerCase()));
+  setAuthorBooks(searchedBooks)
+  },
+  [searchTermState]
+)
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedAuthor(author);
@@ -44,7 +71,7 @@ export const API = () => {
     } else {
       setAuthorBooks([]);
     }
-  }, [debouncedAuthor]);
+  }, [debouncedAuthor]); 
 
   const handleInputChange = (e) => {
     setAuthor(e.target.value);
@@ -76,12 +103,24 @@ export const API = () => {
   };
   return (
     <div>
+          <button
+          onClick={
+            () => {
+            setLength(true)}
+            }
+            >Under 300</button>
+
       <input
         type="text"
         value={author}
         onChange={handleInputChange}
         placeholder="Enter author name"
       />
+
+      { (
+        <APISearch authorBooks={authorBooks} />
+      )
+      }
       {authorBooks.length > 0 ? (
         <article>
           <div className="book-card-container">
@@ -103,7 +142,7 @@ export const API = () => {
                   <h4>Publication Date: {book.publicationYear}</h4>
                   {book.firstLine && (
                     <p className="first-line">
-    First Line: {truncateText(book.firstLine, 100)}
+    Opening Sentence: {truncateText(book.firstLine, 100)}
                     </p>
                   )}
                 </div>
@@ -117,3 +156,4 @@ export const API = () => {
     </div>
   );
 };
+
