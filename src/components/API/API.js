@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./API.css";
 import { APISearch } from "./APISearch";
+import { useNavigate } from "react-router-dom";
 
 export const API = ({ searchTermState }) => {
   const [author, setAuthor] = useState("");
   const [authorBooks, setAuthorBooks] = useState([]);
   const [debouncedAuthor, setDebouncedAuthor] = useState("");
   const [bookLength, setLength] = useState(false);
+  const navigate = useNavigate();
 
 
   const fetchAuthorBooks = () => {
@@ -112,15 +114,16 @@ export const API = ({ searchTermState }) => {
       <label>
         <span className="toggle-label"> 
         Under <span>  500</span>  Pages
-        </span>
         <input
           type="checkbox"
           checked={bookLength}
           onChange={() => setLength(!bookLength)}
           className="toggle-checkbox"
         />
+                </span>
+
       </label>
-      <button className="add-to-booklist">Add to Booklist</button>
+      <button className="add-to-booklist"><span> Add to Booklist</span></button>
 
       </div>
 

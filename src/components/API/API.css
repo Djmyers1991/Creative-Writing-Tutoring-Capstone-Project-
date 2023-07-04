@@ -121,13 +121,13 @@ p {
   font-size: 18px;
   margin-right: 5px;
   font-weight: bold;
-  text-transform: uppercase;
   background-color: white;
   border: 1px solid lightblue;
   padding: 5px 10px;
   border-radius: 30px; /* Changed to oval shape */
-  color: lightblue;
+  color: #c4bfbf;
   border-width: 2px;
+  margin-bottom: 0px;
 }
 
 .toggle-label span {
@@ -200,7 +200,7 @@ p {
   border-radius: 30px; /* Changed to oval shape */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 14px;
-  color: lightblue;
+  color: #888;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   border-width: 2px;
@@ -214,13 +214,14 @@ p {
 .find-author {
   background-color: white;
   border: 4px solid lightblue; /* Increased border width */
-  color: lightblue;
+  color: #888 !important;
   padding: 5px 10px;
   border-radius: 30px; /* Changed to oval shape */
   cursor: pointer;
 }
 
 .link.create-account {
+  /* Existing styles */
   color: lightblue;
   text-decoration: none;
   background-color: white;
@@ -228,7 +229,13 @@ p {
   padding: 5px 10px;
   border-radius: 30px; /* Changed to oval shape */
   border-width: 2px;
+  display: inline-block; /* Add this line */
+  text-align: center; /* Add this line */
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
+
 
 .link.create-account:hover {
   color: navy;
@@ -265,3 +272,150 @@ p {
   position: relative;
   z-index: 1;
 }
+.author-input {
+  /* Existing styles */
+  color: #888;
+}
+
+.create-account {
+  /* Existing styles */
+  text-align: center;
+}
+
+.create-account::before {
+  /* Remove the circle in the center */
+  content: none;
+}
+
+.author-input {
+  /* Existing styles */
+  color: #888 !important;
+}
+
+.add-to-booklist,
+.link.create-account {
+  /* Existing styles */
+  color: #888 !important;
+}
+
+.author-input,
+.add-to-booklist {
+  /* Existing styles */
+  margin-bottom: 50px;
+}
+
+.link:hover {
+  /* Existing styles */
+  color: navy !important;
+}
+
+.add-to-booklist {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border: 4px solid lightblue;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: lightblue;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-width: 2px;
+  margin: 40px;
+}
+
+.add-to-booklist:hover {
+  background-color: white;
+  color: navy;
+}
+
+.link.add-to-booklist {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border: 4px solid lightblue;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: lightblue;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-width: 2px;
+  margin-bottom: 50px;
+}
+
+.link.add-to-booklist:hover {
+  background-color: white;
+  color: navy;
+}
+
+.toggle-label:hover {
+  background-color: white;
+  color: navy;
+  border-color: navy;
+}
+
+
+.add-to-booklist:hover {
+  background-color: white;
+  color: navy;
+  border-color: navy;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Add margin-bottom for spacing */
+}
+
+.add-to-booklist:hover {
+  background-color: white;
+  color: navy;
+  border-color: navy;
+}
+
+.add-to-booklist:hover span {
+  color: navy;
+}
+
+
+.add-to-booklist:hover {
+  /* Existing styles */
+  background-color: white;
+  border-color: navy;
+}
+
+.add-to-booklist:hover span {
+  /* New styles */
+  color: navy;
+}
+
+.link.create-account {
+  /* Existing styles */
+  border: 1px solid gray;
+}
+
+.link.create-account:hover {
+  /* Updated styles */
+  border-color: navy;
+}
+
+.author-input {
+  /* Existing styles */
+  border: 1px solid gray;
+}
+
+.author-input:hover {
+  /* Updated styles */
+  border-color: navy;
+}
+.author-input {
+  /* Existing styles */
+  color: black !important;
+}
+
