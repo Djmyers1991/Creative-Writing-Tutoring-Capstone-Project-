@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-   const localWritingUser = localStorage.getItem("writing_user");
-    const writingUserObject = JSON.parse(localWritingUser);
+   
+
+
 export const EditBookList = () => {
+
     const [bookList, update] = useState({
-        userId: 0,
+      userId: 0,
       title: "",
       author: "",
       image: "",
@@ -18,20 +20,21 @@ export const EditBookList = () => {
     const writingUserObject = JSON.parse(localWritingUser);
 
     const {bookListId} = useParams()
+    
     useEffect(()=> {
-        fetch(`http://localhost:8088/bookList?id=${bookListId}`)
+        fetch(`http://localhost:8088/bookList/${bookListId}`)
         .then(response => response.json())
-        .then((data)=> {
-            const bookListObject = data[0]
-            update(bookListObject)
+        .then((data) => {
+            update(data)
 
         })
     }, [bookListId]
     )
-const handleSaveButtonClick = (event) => {
+
+    const handleSaveButtonClick = (event) => {
     event.preventDefault()
 
-    return (fetch `http://localhost:8088/bookList/${bookListId}`,{
+     return fetch (`http://localhost:8088/bookList/${bookList.id}`,{
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -39,7 +42,7 @@ const handleSaveButtonClick = (event) => {
         },
         body: JSON.stringify(bookList)
     })
-    .then(response=> response.json())
+    .then(response => response.json())
     .then(() => {
 
         navigate("/list")
@@ -47,8 +50,7 @@ const handleSaveButtonClick = (event) => {
     )
 
 }
-return (
-    <>
+return <>
 <h2 className="submissionForm__title">The Book List Selection of {writingUserObject.name} </h2>
     <form className="bookListForm"> 
       <fieldset>
@@ -151,9 +153,8 @@ return (
 Save Edits     
  </button>
       </form>
-    </>
-  );
   
+  </>
 
 }
 

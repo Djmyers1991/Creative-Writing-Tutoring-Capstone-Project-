@@ -58,7 +58,7 @@ export const ApplicationViews = () => {
                 <Route path="packages/:packageId/edit" element={ <PackageEdit />} />
                 <Route path= "bookListForm" element={ <BookListForm />} />
                 <Route path= "list" element={ <BookList />} />
-                <Route path="list/:listId/edit" element={ <EditBookList />} />
+                <Route path="bookList/:bookListId/edit" element={ <EditBookList />} />
 
 
 

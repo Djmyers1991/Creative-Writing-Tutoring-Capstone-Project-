@@ -55,7 +55,8 @@ const navigate = useNavigate()
                     <img src={book.image} alt="Book Cover" className="book-cover" />
                   </div>
                   <div className="book-content">
-                    <h2><Link to ='/list/:listId/edit'> {book.title} </Link></h2>
+                    <h2><Link to={`/bookList/${book.id}/edit`}> {book.title} </Link></h2>
+
                     <h3>{book.author}</h3>
                     <h4>Rating: {book.rating} <br />
                     Inspirational Line: <br />{book.favoriteLine}</h4>
