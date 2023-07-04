@@ -123,7 +123,7 @@ export const API = ({ searchTermState }) => {
                 </span>
 
       </label>
-      <button className="add-to-booklist"><span> Add to Booklist</span></button>
+      <button onClick={ () => navigate("/bookListForm")} className="add-to-booklist"><span> Add to Booklist</span></button>
 
       </div>
 

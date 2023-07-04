@@ -2,12 +2,10 @@ import { Outlet, Route, Routes } from "react-router-dom"
 import { TutorList } from "../Tutors/TutorList"
 import { PackageList } from "../Packages/PackageList"
 import { SubmissionForm } from "../Submissions/SubmissionForm"
-import { SubmissionList } from "../Submissions/SubmissionList"
 import { MessageFormStudent } from "../Messages/MessageFormStudent"
 import { MessageFormTutor } from "../Messages/MessageFormTutor"
 import { MessageList } from "../Messages/MessageList"
 import { PackageForm } from "../Packages/PackageForm"
-import { SubmissionSearch } from "../Submissions/SubmissionList"
 import { SubmissionContainer } from "../Submissions/SubmissionContainer"
 import { EmployeeProfile } from "../Profile/EmployeeProfile"
 import { SubmissionEdit } from "../Submissions/SubmissionEdit"
@@ -20,6 +18,10 @@ import { App, ContainerSort } from "../auth/DragnDrop/BookClubList"
 import { TutorForm } from "../Tutors/TutorForm"
 import { PackageEdit } from "../Packages/EditPackage"
 import { APIContainer } from "../API/APIContainer"
+import { BookListForm } from "../API/APIBookForm"
+import { BookList } from "../API/APIBookList"
+import "./ApplicationViews.css"
+import { EditBookList } from "../API/EditBookList"
 
 export const ApplicationViews = () => {
     const localWritingUser = localStorage.getItem("writing_user");
@@ -29,6 +31,7 @@ export const ApplicationViews = () => {
             <Route path="/" element={
                 <>
                    <h1 className="title--main">Creative Writing Website</h1>
+                   <h5 className="subtitle">The irony lies in our title's lack of creativity. That's art.</h5>
 		
                     <Outlet />
                 </>
@@ -53,6 +56,11 @@ export const ApplicationViews = () => {
                 <Route path= "tutorForm" element={ <TutorForm />} />
                 <Route path= "API" element={ <APIContainer />} />
                 <Route path="packages/:packageId/edit" element={ <PackageEdit />} />
+                <Route path= "bookListForm" element={ <BookListForm />} />
+                <Route path= "list" element={ <BookList />} />
+                <Route path="list/:listId/edit" element={ <EditBookList />} />
+
+
 
 
 
