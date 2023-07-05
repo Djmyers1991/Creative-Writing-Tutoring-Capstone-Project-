@@ -41,11 +41,11 @@ export const PackageForm = () => {
 
     return (
         <form className="packageForm">
-            <h2 className="packageForm__title">Create New Package</h2>
+            <h2 className="packageHeader">Create New Package</h2>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="description">Name of Genre:</label>
+                    <label htmlFor="description" className="form-formatting">Name of Genre:</label>
                     <input
                         required autoFocus
                         type="text"
@@ -63,7 +63,7 @@ export const PackageForm = () => {
             </fieldset> 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="description">Price:</label>
+                    <label htmlFor="description" className="form-formatting">Price:</label>
                     <input
                         required autoFocus
                         type="number"
@@ -79,7 +79,7 @@ export const PackageForm = () => {
             </fieldset> 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="description">Description:</label>
+                    <label htmlFor="description" className="form-formatting">Description:</label>
                     <input
                         required autoFocus
                         type="text"

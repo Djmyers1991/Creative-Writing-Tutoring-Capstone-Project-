@@ -89,18 +89,21 @@ export const CompletedSubmissionForm = () => {
                 findRightFilteredSubmission(correctSubmissions);
             })
 
-    })
+          
 
+    },
+    [submissions])
+    
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-        const submissionToSendToAPI = {
+        const completedSubmissionToSendToAPI = {
             userId: completedSubmission.userId,
             paymentReceived: true,
             packageId: completedSubmission.packageId,
             linkWithEdits: completedSubmission.linkWithEdits,
             specificFeedback: completedSubmission.specificFeedback,
-            tutorId: completedSubmission.tutorId,
+            tutorId: writingUserObject.id,
             dateCompleted: completedSubmission.dateCompleted,
             submissionId: completedSubmission.submissionId,
             paymentReceived: true,
@@ -113,15 +116,17 @@ export const CompletedSubmissionForm = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(submissionToSendToAPI)
+            body: JSON.stringify(completedSubmissionToSendToAPI)
         })
             .then(response => response.json())
             .then(() => {
-                navigate("/completedSubmissions")
+                navigate("/submissions")
 
             })
 
     }
+
+
 
     return (
         <form className="submissionForm">
@@ -144,10 +149,11 @@ export const CompletedSubmissionForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group select">
-                    <label htmlFor="submissionNumber">Submission Identification:</label>
+                    <label htmlFor="submissionNumber" className="label-bold">Submission Identification:</label>
                     <select value={completedSubmission.submissionId} onChange={(evt) => {
                         const copy = { ...completedSubmission }
                         copy.submissionId = parseInt(evt.target.value)
+                        update(copy)
 
                     }}>
                         <option value="0">Id</option>
@@ -158,7 +164,7 @@ export const CompletedSubmissionForm = () => {
 
                 </div>
             </fieldset>
-            <fieldset>
+            {/* <fieldset>
                 <div className="form-group select">
                     <label className="label-bold" htmlFor="studentName">Reviewer:</label>                    <select value={completedSubmission.tutorName} onChange={(evt) => {
                         const copy = { ...completedSubmission }
@@ -171,7 +177,7 @@ export const CompletedSubmissionForm = () => {
                         }
                     </select>
                 </div>
-            </fieldset>
+            </fieldset> */}
 
             <fieldset>
                 <div className="form-group select">
@@ -192,7 +198,7 @@ export const CompletedSubmissionForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="linkWithEdits">Edited Submission:</label>
+                    <label className="label-bold" htmlFor="linkWithEdits">Edited Submission:</label>
                     <input
                         required
                         autoFocus

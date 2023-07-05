@@ -29,5 +29,7 @@ p {
 
 .title--main {
   margin-block-end: 0;
+  font-family: georgia;
+  font-size: 2rem;
 }
 

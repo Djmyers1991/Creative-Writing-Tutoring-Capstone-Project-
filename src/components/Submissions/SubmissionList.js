@@ -83,7 +83,7 @@ export const SubmissionList = ({ searchTermState }) => {
 
   return (
     <>
-      <h2>Submissions</h2>
+      <h2 className="submissionHeaderRollTide">Submissions</h2>
       <article className="submissions">
         {filteredSubmissions.map((submission) => {
           const tutorName = users.find((user) => user.id === submission.tutorId);

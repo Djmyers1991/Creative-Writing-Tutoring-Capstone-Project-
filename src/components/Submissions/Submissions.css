@@ -32,6 +32,7 @@
     text-align: center;
     font-size: 24px;
     margin-bottom: 20px;
+    font-family: georgia;
   }
   
   .form-group {
@@ -103,6 +104,7 @@
   
   .label-bold {
     font-weight: bold;
+    font-family: georgia;
   }
 
 .form-control.student-name::placeholder {
@@ -110,4 +112,13 @@
   }
   
   
-  
+  .submissionHeaderRollTide {
+    display: flex;
+    justify-content: center;
+    font-family: georgia;
+    font-size: 1.5rem;
+  }
+
+  #specificSub {
+    font-size: 1.5rem;
+  }
