@@ -44,9 +44,13 @@ article {
     justify-content: center;
     font-family: Georgia;
     font-size: 30px;
-    color: coral;
   }
 
   .packageName{
     font-size: large;
+  }
+
+  .form-formatting{
+    font-family: georgia;
+    font-size: 1rem;
   }

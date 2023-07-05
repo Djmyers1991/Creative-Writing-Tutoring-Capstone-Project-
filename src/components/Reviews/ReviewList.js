@@ -61,14 +61,14 @@ export const ReviewList = () => {
     return <>
 
 
-  <h2>Reviews</h2>
+  <h2 className="messageHeader">Reviews</h2>
   <article className="studentReviews">
     {reviews.map((review) => {
       const tutor = tutors.find((tutor) => tutor.id === review.tutorId)
       return (
         <section className="individualReview" key={review.id}>
           {/* <div>{tutor.name}</div> */}
-          <div>{review.message}</div>
+          <div className="reviewFont">{review.message}</div>
           {/* <footer>{deleteButton(tutorMessager)}</footer> */}
           <footer>{ deleteButton(review)} </footer>
         </section>

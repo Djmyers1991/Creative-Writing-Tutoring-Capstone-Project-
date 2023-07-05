@@ -93,7 +93,7 @@ useEffect(()=> {
       };
       return (
         <>
-          <h2>Finished Submissions</h2>
+          <h2 className="messageHeader" id="specificSub">Finished Submissions</h2>
           <article className="submissions">
             {filteredSubmissions.map((submission) => (
               !writingUserObject.staff || !submission.isFinished ? (

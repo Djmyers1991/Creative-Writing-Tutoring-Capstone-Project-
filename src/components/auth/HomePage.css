@@ -12,6 +12,7 @@
 .introduction {
   text-align: center;
   margin-bottom: 40px;
+  font-family: georgia;
 }
 
 .introduction h1 {
@@ -23,7 +24,7 @@
   font-family: georgia;
 }
 .body {
-  font-family: Georgia;
+  font-family: georgia;
 }
 
 .introduction h3 {
@@ -81,6 +82,7 @@ color: blue}
     border: 2px solid lightblue;
     border-radius: 10px;
     padding: 10px;
+    font-family: georgia;
 
 }
 

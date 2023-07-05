@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Message.css";
 
 export const MessageList = () => {
   const [tutorMessages, setTutorMessages] = useState([]);
@@ -111,7 +112,7 @@ const individualStudentMessageCounter = filteredTutorMessages.length
 
   return (
     <>
-      <h2>Messages</h2>
+      <h2 className="messageHeader">Messages</h2>
       <article className="tutorMessages">
   {filteredTutorMessages.map((tutorMessager) => {
     const tuturUser = users.find((user) => user.id === tutorMessager.studentId);
