@@ -39,7 +39,24 @@ const navigate = useNavigate()
       }, [books]);
           
 
-
+      const deleteButton = (book) => {
+        return (
+            <button
+              onClick={() => {
+                fetch(`http://localhost:8088/bookList/${book.id}`, {
+                  method: "DELETE"
+                })
+                  .then(() => {
+                    getAllBooks()
+                  });
+              }}
+              className="submission__delete"
+            >
+              Delete
+            </button>
+          
+       
+        )}
     return (
         <>
           <article className="bookList">
@@ -56,7 +73,8 @@ const navigate = useNavigate()
                   </div>
                   <div className="book-content">
                     <h2><Link to={`/bookList/${book.id}/edit`}> {book.title} </Link></h2>
-
+                    {
+            deleteButton(book)}
                     <h3>{book.author}</h3>
                     <h4>Rating: {book.rating} <br />
                     Inspirational Line: <br />{book.favoriteLine}</h4>
@@ -65,6 +83,7 @@ const navigate = useNavigate()
                 </div>
               </section>
             ))}
+          
           </article>
         </>
       );
