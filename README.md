@@ -29,69 +29,24 @@ npm start
 4. Sign in as one of the following users.
    ```sh {  "users": [
     {
-      "id": 1,
       "name": "Daniel Myers",
       "email": "DanielM@gmail.com",
       "isStaff": true,
       "isChiefAdmin": true
     },
     {
-      "id": 2,
-      "name": "Tiana Robinson",
-      "email": "TRob@gmail.com",
-      "isStaff": true,
-      "isChiefAdmin": false
-    },
-    {
-      "id": 3,
       "name": "Steve Brownlee",
       "email": "steviewondersoften@aol.com",
       "isStaff": true,
       "isChiefAdmin": false
     },
     {
-      "id": 9,
-      "name": "Greg Korte",
-      "email": "cousinGreg@gmail.com",
-      "isStaff": true,
-      "isChiefAdmin": false
-    },
-    {
-      "id": 4,
-      "name": "Chesney Hardin",
-      "email": "CharChar@netvibes.com",
-      "isStaff": false,
-      "isChiefAdmin": false
-    },
-    {
-      "id": 5,
-      "name": "Jonathan VanDuyne",
-      "email": "sexandthecityislife@carrieisme.com",
-      "isStaff": false,
-      "isChiefAdmin": false
-    },
-    {
-      "id": 6,
       "name": "Lance Lancey",
       "email": "Lance@lance.lance",
       "isStaff": false,
       "isChiefAdmin": false
-    },
-    {
-      "id": 7,
-      "email": "cassieRevell@catsrus.com",
-      "name": "Cassie Revell",
-      "isStaff": false,
-      "isChiefAdmin": false
-    },
-    {
-      "id": 8,
-      "email": "Belle@radiatorsprings.org",
-      "name": "Belle Hollander",
-      "isStaff": false,
-      "isChiefAdmin": false
     }
-   }
+
 ```
 To see the entire database, please click the following link.
 
