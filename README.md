@@ -21,7 +21,7 @@ Creative Writing Website is an application designed for aspiring writers to seek
 ## Getting Started
 
 ### Server Side
-1. Clone this repository for the server side and access the repository:
+1. Clone the repository for the server side:
 ```sh
 git clone git@github.com:Djmyers1991/Creative-Writing-Website-Database.git
 cd Creative-Writing-Website-Database```
