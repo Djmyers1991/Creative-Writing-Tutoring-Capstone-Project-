@@ -58,7 +58,6 @@ https://dbdiagram.io/d/64812bc5722eb7749497e575
 
 ## Wireframe
 
-https://miro.com/app/board/o9J_kiGCSK4=/
-
+https://miro.com/app/board/uXjVMAz1gJ8=/?share_link_id=532942704386
 
 ## Features
