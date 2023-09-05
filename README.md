@@ -46,7 +46,6 @@ npm start
       "isStaff": false,
       "isChiefAdmin": false
     }
-```
 
 5. To view the entire database, please click the following link.
 
