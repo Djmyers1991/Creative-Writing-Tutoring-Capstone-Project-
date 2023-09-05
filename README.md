@@ -3,9 +3,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Application Overview
-Rare is a content management application for users to create/edit/delete posts as well as comment on others' posts via comments, tags, and reactions. To contextualize the content, categories are applied to each post to ensure the users are perusing insights relatable to their interests. As such, admins and authors can create/edit/delete categories as well as individual comments, tags, and reactions. To ensure that the content is appropriate, only admins are allowed to edit and delete pre-existing tags and categories. As authors are able to delete their own comments and posts, an individual page will proliferate with the logged in user's posts. The overall purpose of our app is to allow users to interact with like-minded individuals and bond over shared communal interests. Our app is less about managing content than it is about fostering life-long relationships.   
+## Application Overview: Creative Writing Website 
+# The Irony is in the Title's Lack of Creativity 
+Creative Writing Website is an application designed for aspiring writers to seek advice from creative writing instructors. Instructors have the ability to create, edit, or delete new creative writing packages as well as update their tutor profiles. They can send messages to students, view submissions, and upload their edits of student submissions. Student users can view the profiles and packages as well as submit their work to instructors. Students can edit or delete their submissions until the tutor has viewed them. Once the submission is edited, students can view the feedback and leave a public review for their instructor. Through this application, instructors and students have access to the Open-Library database via an external API that enables users to search authors and extract a list of books — along with their title, page count, and first lines. For those averse to large novels, users can press a button which will show books 500 pages and below.
 
+ — React application utilizing React Hooks to establish and observe state
+ — Reinforced a variety of JAVASCRIPT methods to display the correct information
+ — Attained full CRUD Application with React and CSS Styling
+ — Gained access to an external data of literature through the Open Library API
 ## Technologies Used
 
  ![HTML5](https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Git](https://img.shields.io/badge/git%20-%23F05033.svg?&style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white) ![JSON Server](https://img.shields.io/badge/JSON_Server%20-%232a2e2a.svg?&style=for-the-badge&logo=JSON&logoColor=white) 
@@ -14,14 +19,12 @@ Rare is a content management application for users to create/edit/delete posts a
 ## Getting Started
 
 ### Server Side
-1. Clone this repository for the server side:
+1. Clone this repository for the server side and access the repository:
 ```sh
 git clone git@github.com:Djmyers1991/Creative-Writing-Website-Database.git
-```
-2. Check into the right file
-```sh
 cd Creative-Writing-Website-Database```
-3. Ensure that the JSON server is running
+
+2. Ensure that the JSON server is running
 ```sh
 json-server database.json -p 8088
 ```
