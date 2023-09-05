@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # Application Overview: Creative Writing Website 
 ### The Irony is in the Title's Lack of Creativity 
