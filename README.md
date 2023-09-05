@@ -27,7 +27,7 @@ npm install
 npm start
 ```
 4. Sign in as one of the following users.
-     "users": [
+   ```sh {  "users": [
     {
       "id": 1,
       "name": "Daniel Myers",
@@ -91,7 +91,8 @@ npm start
       "isStaff": false,
       "isChiefAdmin": false
     }
-
+   }
+```
 To see the entire database, please click the following link.
 
 https://github.com/Djmyers1991/Creative-Writing-Website-Database/blob/main/database.json
