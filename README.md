@@ -3,8 +3,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Application Overview: Creative Writing Website 
-# The Irony is in the Title's Lack of Creativity 
+# Application Overview: Creative Writing Website 
+### The Irony is in the Title's Lack of Creativity 
 Creative Writing Website is an application designed for aspiring writers to seek advice from creative writing instructors. Instructors have the ability to create, edit, or delete new creative writing packages as well as update their tutor profiles. They can send messages to students, view submissions, and upload their edits of student submissions. Student users can view the profiles and packages as well as submit their work to instructors. Students can edit or delete their submissions until the tutor has viewed them. Once the submission is edited, students can view the feedback and leave a public review for their instructor. Through this application, instructors and students have access to the Open-Library database via an external API that enables users to search authors and extract a list of books — along with their title, page count, and first lines. For those averse to large novels, users can press a button which will show books 500 pages and below.
 
  — React application utilizing React Hooks to establish and observe state
