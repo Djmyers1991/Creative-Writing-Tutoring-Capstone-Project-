@@ -12,10 +12,11 @@ Rare is a content management application for users to create/edit/delete posts a
 ![Visual Studio Code](https://img.shields.io/badge/VSCode%20-%23007ACC.svg?&style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 ### Client Side
+To run this program, please do the following.
 1. Clone this repository for the client side:
 ```sh
-git clone git@github.com:NSS-Day-Cohort-64/rare-django-client-glacier-freeze.git
-cd rare-django-client-glacier-freeze
+git clone git@github.com:Djmyers1991/Creative-Writing-Tutoring-Capstone-Project-.git
+cd Creative-Writing-Tutoring-Capstone-Project-
 ```
 2. Install dependencies: 
 ```sh
@@ -25,7 +26,75 @@ npm install
 ```sh
 npm start
 ```
+4. Sign in as one of the following users.
+     "users": [
+    {
+      "id": 1,
+      "name": "Daniel Myers",
+      "email": "DanielM@gmail.com",
+      "isStaff": true,
+      "isChiefAdmin": true
+    },
+    {
+      "id": 2,
+      "name": "Tiana Robinson",
+      "email": "TRob@gmail.com",
+      "isStaff": true,
+      "isChiefAdmin": false
+    },
+    {
+      "id": 3,
+      "name": "Steve Brownlee",
+      "email": "steviewondersoften@aol.com",
+      "isStaff": true,
+      "isChiefAdmin": false
+    },
+    {
+      "id": 9,
+      "name": "Greg Korte",
+      "email": "cousinGreg@gmail.com",
+      "isStaff": true,
+      "isChiefAdmin": false
+    },
+    {
+      "id": 4,
+      "name": "Chesney Hardin",
+      "email": "CharChar@netvibes.com",
+      "isStaff": false,
+      "isChiefAdmin": false
+    },
+    {
+      "id": 5,
+      "name": "Jonathan VanDuyne",
+      "email": "sexandthecityislife@carrieisme.com",
+      "isStaff": false,
+      "isChiefAdmin": false
+    },
+    {
+      "id": 6,
+      "name": "Lance Lancey",
+      "email": "Lance@lance.lance",
+      "isStaff": false,
+      "isChiefAdmin": false
+    },
+    {
+      "id": 7,
+      "email": "cassieRevell@catsrus.com",
+      "name": "Cassie Revell",
+      "isStaff": false,
+      "isChiefAdmin": false
+    },
+    {
+      "id": 8,
+      "email": "Belle@radiatorsprings.org",
+      "name": "Belle Hollander",
+      "isStaff": false,
+      "isChiefAdmin": false
+    }
 
+To see the entire database, please click the following link.
+
+https://github.com/Djmyers1991/Creative-Writing-Website-Database/blob/main/database.json
 
 ## ERD
 
