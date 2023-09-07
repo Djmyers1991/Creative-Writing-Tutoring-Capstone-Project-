@@ -17,13 +17,12 @@ Creative Writing Website is an application designed for aspiring writers to seek
 ## Getting Started
 
 ### Server Side
-1. Clone the repository for the server side:
+1. Clone the repository for the server side and ensure the JSON server is running:
 ```sh
 git clone git@github.com:Djmyers1991/Creative-Writing-Website-Database.git
 cd Creative-Writing-Website-Database```
 
-2. Ensure that the JSON server is running:
-```sh
+
 json-server database.json -p 8088```
 ### Client Side
 To run this program, please do the following.
