@@ -22,7 +22,7 @@ Creative Writing Website is an application designed for aspiring writers to seek
 git clone git@github.com:Djmyers1991/Creative-Writing-Website-Database.git
 cd Creative-Writing-Website-Database```
 
-2. Ensure that the JSON server is running
+2. Ensure that the JSON server is running:
 ```sh
 json-server database.json -p 8088```
 ### Client Side
