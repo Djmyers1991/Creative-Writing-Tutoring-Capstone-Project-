@@ -154,6 +154,6 @@ export const BookListForm = () => {
                     >
 Add to your Book List                    </button>
                 </form>
-                );
+                )
       
-}
+};

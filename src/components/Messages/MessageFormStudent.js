@@ -104,4 +104,4 @@ export const MessageFormStudent = () => {
             </button>
         </form>
     )
-}
+};

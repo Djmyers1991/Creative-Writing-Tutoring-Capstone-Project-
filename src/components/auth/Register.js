@@ -87,5 +87,5 @@ export const Register = (props) => {
             </form>
         </main>
     )
-}
+};
 

@@ -27,7 +27,7 @@ export const App = () => {
       </header>
     </div>
   );
-};
+}
 
 
 
