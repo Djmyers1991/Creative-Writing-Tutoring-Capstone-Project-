@@ -24,8 +24,7 @@ cd Creative-Writing-Website-Database```
 
 2. Ensure that the JSON server is running
 ```sh
-json-server database.json -p 8088
-```
+json-server database.json -p 8088```
 ### Client Side
 To run this program, please do the following.
 1. Clone this repository for the client side:
