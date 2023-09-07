@@ -21,8 +21,6 @@ Creative Writing Website is an application designed for aspiring writers to seek
 ```sh
 git clone git@github.com:Djmyers1991/Creative-Writing-Website-Database.git
 cd Creative-Writing-Website-Database
-
-
 json-server database.json -p 8088
 ```
 
