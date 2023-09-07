@@ -23,7 +23,7 @@ git clone git@github.com:Djmyers1991/Creative-Writing-Website-Database.git
 cd Creative-Writing-Website-Database
 
 
-json-server database.json -p 8088```
+json-server database.json -p 8088
 
 
 ### Client Side
