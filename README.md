@@ -61,9 +61,9 @@ npm start
     }
 
 5. To view the entire database, please click the following link.
-```sh
+
  https://github.com/Djmyers1991/Creative-Writing-Website-Database/blob/main/database.json
-```
+
 
 ## ERD
 
